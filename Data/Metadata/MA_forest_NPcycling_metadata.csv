@@ -1,0 +1,187 @@
+,Variable,Description,Units,Date measured
+1,all_ECM_Ndecomp_ECfun,Sum of all ectomycorrhizal N-decomposition gene group relative abundances,unitless,July_2021
+2,all_Ndecomp_ECbac_avg,Average of all bacterial N-decomposition gene group relative abundances,unitless,July_2021
+3,all_Ndecomp_ECbac_sum,Sum of all bacterial N-decomposition gene group relative abundances,unitless,July_2021
+4,all_oligo_Ndecomp_EC,Sum of all oligotrophic bacterial N-decomposition gene group relative abundances,unitless,July_2021
+5,All_plants,"Cumulative sum of all understory plant scores (specifically Broad_leaf_herbs, Grassy_herbs, Ferns, Shrubs, White_pine_seedlings, Oak_seedlings, Other_tree_seedlings) using the Braun-Blanquet method",unitless,June_2022
+6,AM_abundance,Relative abundance of arbuscular mycorrhizal fungi in high-throughput amplicon sequence data,unitless,July_2021
+7,AM_basal,Basal area of all arbuscular mycorrhizal trees >5cm diameter at breast height in a 10m x 10m square plot centered between the A and B sampling points,centimeters cubed,June_2022
+8,amidine.hydro_ECbac_abund,Relative abundance of amidine hydrolase gene copies in the bacterial community estimated from amplicon sequence data,unitless,July_2021
+9,amidine.hydro_ECfun_abund,Relative abundance of amidine hydrolase gene copies in the fungal community estimated from amplicon sequence data,unitless,July_2021
+10,amine.oxidase_ECbac_abund,Relative abundance of amidine hydrolase gene copies in the bacterial community estimated from amplicon sequence data,unitless,July_2021
+11,amine.oxidase_ECfun_abund,Relative abundance of amidine hydrolase gene copies in the fungal community estimated from amplicon sequence data,unitless,July_2021
+12,amino.hydro_ECbac_abund,Relative abundance of amino hydrolase gene copies in the bacterial community estimated from amplicon sequence data,unitless,July_2021
+13,amino.hydro_ECfun_abund,Relative abundance of amino hydrolase gene copies in the fungal community estimated from amplicon sequence data,unitless,July_2021
+14,Ammonification,Net soil ammonification rate ,micrograms NH4-N per gram dry soil per day,July - August 2021
+15,bac_amm_neg_module_abundance,Cumulative relative abundance of bacterial taxa in low ammonification indicator co-occurrence module as identified by Weighted Gene Network Correlation Analysis,unitless,July_2021
+16,bac_amm_pos_module_abundance,Cumulative relative abundance of bacterial taxa in high ammonification indicator co-occurrence module as identified by Weighted Gene Network Correlation Analysis,unitless,July_2021
+17,bac_copy_number,Copy numbers of the v4 16S DNA region per 1ul DNA extract as measured by quantitative PCR,gene copies per microliter DNA extract,July_2021
+18,bac_evenness,Bacterial evenness in high-throughput amplicon sequence data,unitless,July_2021
+19,bac_nitr_neg_module_abundance,Cumulative relative abundance of bacterial taxa in low nitrification indicator co-occurrence module as identified by Weighted Gene Network Correlation Analysis,unitless,July_2021
+20,bac_nitr_pos_module_abundance,Cumulative relative abundance of bacterial taxa in high nitrification indicator co-occurrence module as identified by Weighted Gene Network Correlation Analysis,unitless,July_2021
+21,bac_pmin_neg_module_abundance,Cumulative relative abundance of bacterial taxa in low phosphate change indicator co-occurrence module as identified by Weighted Gene Network Correlation Analysis,unitless,July_2021
+22,bac_pmin_pos_module_abundance,Cumulative relative abundance of bacterial taxa in high phosphate change indicator co-occurrence module as identified by Weighted Gene Network Correlation Analysis,unitless,July_2021
+23,bac_richness,Bacterial richness in high-throughput amplicon sequence data,unitless,July_2021
+24,bac_shannon,Bacterial shannon diversity in high-throughput amplicon sequence data,unitless,July_2021
+25,Bare_soil,"Understory cover of exposed soil, measured in a 1m x 1m square around the sampling point using the Braun-Blanquet method on a scale of 0-5: groups with 75-100% coverage were scored a 5, 50-75% = 4, 25-50% = 3, 5-25% = 2, >0 - 5% = 1, 0% = 0. ",unitless,June_2022
+26,Broad_leaf_herbs,"Understory cover of broad-leaf herbs, measured in a 1m x 1m square around the sampling point using the Braun-Blanquet method on a scale of 0-5: groups with 75-100% coverage were scored a 5, 50-75% = 4, 25-50% = 3, 5-25% = 2, >0 - 5% = 1, 0% = 0. ",unitless,June_2022
+27,contact_expl,Relative abundance of contact exploration type ectomycorrhizal fungi in high-throughput amplicon sequence data,unitless,July_2021
+28,Copios_denitrification_ECbac,Relative abundance of copiotrophic bacterial denitrification gene copies in the bacterial community estimated from amplicon sequence data,NA,NA
+29,Copiotroph_abundance,Relative abundance of copiotrophic bacteria in high-throughput amplicon sequence data,unitless,July_2021
+30,Copiotroph_amidine.hydro_ECbac,Relative abundance of copiotrophic bacterial amidine hydrolase gene copies in the bacterial community estimated from amplicon sequence data,unitless,July_2021
+31,Copiotroph_amine.oxidase_ECbac,Relative abundance of copiotrophic bacterial amine oxidase gene copies in the bacterial community estimated from amplicon sequence data,unitless,July_2021
+32,Copiotroph_amino.hydro_ECbac,Relative abundance of copiotrophic bacterial amino hydrolase gene copies in the bacterial community estimated from amplicon sequence data,unitless,July_2021
+33,Copiotroph_DMhydrolase_ECbac,Relative abundance of copiotrophic bacterial diphosphoric monoester hydrolase gene copies in the bacterial community estimated from amplicon sequence data,unitless,July_2021
+34,Copiotroph_glycosidaseN_ECbac,Relative abundance of copiotrophic bacterial glycosidase (hydrolysing N-Glycosyl compounds) gene copies in the bacterial community estimated from amplicon sequence data,unitless,July_2021
+35,Copiotroph_glycosidaseOS_ECbac,Relative abundance of copiotrophic bacterial glycosidase (hydrolysing O- and S-Glycosyl compounds) gene copies in the bacterial community estimated from amplicon sequence data,unitless,July_2021
+36,Copiotroph_chitinase_ECbac,Relative abundance of copiotrophic bacterial chitinase gene copies in the bacterial community estimated from amplicon sequence data,unitless,July_2021
+37,Copiotroph_Noxidoreductase_ECbac,Relative abundance of copiotrophic bacterial N-cycling oxidoreductase gene copies in the bacterial community estimated from amplicon sequence data,unitless,July_2021
+38,Copiotroph_PDhydrolase_ECbac,Relative abundance of copiotrophic bacterial phosphoric diester hydrolase gene copies in the bacterial community estimated from amplicon sequence data,unitless,July_2021
+39,Copiotroph_peptidase_broad_ECbac,Relative abundance of copiotrophic bacterial peptidase gene copies in the bacterial community estimated from amplicon sequence data,unitless,July_2021
+40,Copiotroph_phosphatase_ECbac,Relative abundance of copiotrophic bacterial phosphatase gene copies in the bacterial community estimated from amplicon sequence data,unitless,July_2021
+41,Copiotroph_Phydrolase_ECbac,Relative abundance of copiotrophic bacterial P-targeting hydrolase gene copies in the bacterial community estimated from amplicon sequence data,unitless,July_2021
+42,Copiotroph_PMhydrolase_ECbac,Relative abundance of copiotrophic bacterial phosphoric monoester hydrolase gene copies in the bacterial community estimated from amplicon sequence data,unitless,July_2021
+43,Copiotroph_Poxidoreductase_ECbac,Relative abundance of copiotrophic bacterial P-cycling oxidoreductase gene copies in the bacterial community estimated from amplicon sequence data,unitless,July_2021
+44,Copiotroph_TMhydrolase_ECbac,Relative abundance of copiotrophic bacterial triphosphoric monoester hydrolase gene copies in the bacterial community estimated from amplicon sequence data,unitless,July_2021
+45,CPhydrolase_ECbac_abund,Relative abundance of hydrolases (acting on C-P bonds) gene copies in the bacterial community estimated from amplicon sequence data,unitless,July_2021
+46,denitrification_ECbac_abund,Relative abundance of denitrification gene copies in the bacterial community estimated from amplicon sequence data,,July_2021
+47,Distance,The distance from the forest edge of the sampling location ,meters,NA
+48,DMhydrolase_ECbac_abund,Relative abundance of diphosphoric monoester hydrolase gene copies in the bacterial community estimated from amplicon sequence data,unitless,July_2021
+49,DMhydrolase_ECfun_abund,Relative abundance of diphosphoric monoester hydrolase gene copies in the fungal community estimated from amplicon sequence data,unitless,July_2021
+50,ECM_abundance,Relative abundance of ectomycorrhizal fungi in high-throughput amplicon sequence data,unitless,July_2021
+51,ECM_amidine.hydro_ECfun,Relative abundance of ectomycorrhizal amidine hydrolase gene copies in the fungal community estimated from amplicon sequence data,unitless,July_2021
+52,ECM_amine.oxidase_ECfun,Relative abundance of ectomycorrhizal amine oxidase gene copies in the fungal community estimated from amplicon sequence data,unitless,July_2021
+53,ECM_amino.hydro_ECfun,Relative abundance of ectomycorrhizal amino hydrolase gene copies in the fungal community estimated from amplicon sequence data,unitless,July_2021
+54,ECM_basal,Basal area of all ectomycorrhizal trees >5cm diameter at breast height in a 10m x 10m square plot centered between the A and B sampling points,centimeters cubed,June_2022
+55,ECM_DMhydrolase_ECfun,Relative abundance of ectomycorrhizal diphosphoric monoester hydrolase gene copies in the fungal community estimated from amplicon sequence data,unitless,July_2021
+56,ECM_glycosidaseN_ECfun,Relative abundance of ectomycorrhizal glycosidase (hydrolysing N-Glycosyl compounds) gene copies in the fungal community estimated from amplicon sequence data,unitless,July_2021
+57,ECM_glycosidaseOS_ECfun,Relative abundance of ectomycorrhizal glycosidase (hydrolysing O- and S-Glycosyl compounds) gene copies in the fungal community estimated from amplicon sequence data,unitless,July_2021
+58,ECM_chitinase_ECfun,Relative abundance of ectomycorrhizal chitinase gene copies in the fungal community estimated from amplicon sequence data,unitless,July_2021
+59,ECM_NH4uptake_ECfun,Relative abundance of ectomycorrhizal ammonium uptake gene copies in the fungal community estimated from amplicon sequence data,unitless,July_2021
+60,ECM_Noxidoreductase_ECfun,Relative abundance of ectomycorrhizal  N-cycling oxidoreductase gene copies in the fungal community estimated from amplicon sequence data,unitless,July_2021
+61,ECM_PDhydrolase_ECfun,Relative abundance of ectomycorrhizal phosphoric diester hydrolase gene copies in the fungal community estimated from amplicon sequence data,unitless,July_2021
+62,ECM_peptidase_broad_ECfun,Relative abundance of ectomycorrhizal peptidase gene copies in the fungal community estimated from amplicon sequence data,unitless,July_2021
+63,ECM_phosphatase_ECfun,Relative abundance of ectomycorrhizal phosphatase gene copies in the fungal community estimated from amplicon sequence data,unitless,July_2021
+64,ECM_Phydrolase_ECfun,Relative abundance of ectomycorrhizal P-targeting hydrolase gene copies in the fungal community estimated from amplicon sequence data,unitless,July_2021
+65,ECM_PMhydrolase_ECfun,Relative abundance of ectomycorrhizal phosphoric monoester hydrolase gene copies in the fungal community estimated from amplicon sequence data,unitless,July_2021
+66,ECM_PO4uptake_ECfun,Relative abundance of ectomycorrhizal phosphate uptake gene copies in the fungal community estimated from amplicon sequence data,unitless,July_2021
+67,ECM_Poxidoreductase_ECfun,Relative abundance of ectomycorrhizal bacterial P-cycling oxidoreductase gene copies in the fungal community estimated from amplicon sequence data,unitless,July_2021
+68,ECM_TMhydrolase_ECfun,Relative abundance of ectomycorrhizal bacterial triphosphoric monoester hydrolase gene copies in the fungal community estimated from amplicon sequence data,unitless,July_2021
+69,ECM.AM,Ratio of ectomycorrhizal:arbuscular mycorrhizal tree basal area of all trees >5cm diameter at breast height in a 10m x 10m square plot centered between the A and B sampling points,unitless,June_2022
+70,edaphic_PC1,"First principal component of a Principal Coordinates Analysis encompassing all soil abiotic variables: pH, soil_temp, litter_depth, O_depth, soil_moisture, SOM",unitless,July_2021
+71,EMF_richness,Ectomycorrhizal fungal richness,unitless,July_2021
+72,EMF_Shannon,Ectomycorrhizal fungal Shannon diversity,unitless,July_2021
+73,Ferns,"Understory cover of broad-leaf herbs, measured in a 1m x 1m square around the sampling point using the Braun-Blanquet method on a scale of 0-5: groups with 75-100% coverage were scored a 5, 50-75% = 4, 25-50% = 3, 5-25% = 2, >0 - 5% = 1, 0% = 0. ",unitless,June_2022
+74,Forest_type,The dominant overstory plant community type,unitless,July_2021
+75,fun_amm_neg_module_abundance,Cumulative relative abundance of fungal taxa in low ammonification module as identified by Weighted Gene Network Correlation Analysis,unitless,July_2021
+76,fun_amm_pos_module_abundance,Cumulative relative abundance of fungal taxa in high ammonification module as identified by Weighted Gene Network Correlation Analysis,unitless,July_2021
+77,fun_evenness,Fungal evenness in high-throughput amplicon sequence data,unitless,July_2021
+78,fun_nitr_neg_module_abundance,Cumulative relative abundance of fungal taxa in low nitrification indicator co-occurrence module as identified by Weighted Gene Network Correlation Analysis,unitless,July_2021
+79,fun_nitr_pos_module_abundance,Cumulative relative abundance of fungal taxa in high nitrification indicator co-occurrence module  as identified by Weighted Gene Network Correlation Analysis,unitless,July_2021
+80,fun_pmin_neg_module_abundance,Cumulative relative abundance  of fungal taxa in low phosphate change indicator co-occurrence module as identified by Weighted Gene Network Correlation Analysis,unitless,July_2021
+81,fun_pmin_pos_module_abundance,Cumulative relative abundance of fungal taxa in high phosphate change indicator co-occurrence module as identified by Weighted Gene Network Correlation Analysis,unitless,July_2021
+82,fun_richness,Fungal richness in high-throughput amplicon sequence data,unitless,July_2021
+83,fun_shannon,Fungal shannon diversity in high-throughput amplicon sequence data,unitless,July_2021
+84,glycosidaseN_ECbac_abund,Relative abundance of glycosidase (hydrolysing N-Glycosyl compounds) gene copies in the fungal community estimated from amplicon sequence data,unitless,July_2021
+85,glycosidaseN_ECfun_abund,Relative abundance of glycosidase (hydrolysing N-Glycosyl compounds) gene copies in the fungal community estimated from amplicon sequence data,unitless,July_2021
+86,glycosidaseOS_ECbac_abund,Relative abundance of  glycosidase (hydrolysing O- and S-Glycosyl compounds) gene copies in the bacterial community estimated from amplicon sequence data,unitless,July_2021
+87,glycosidaseOS_ECfun_abund,Relative abundance of  glycosidase (hydrolysing O- and S-Glycosyl compounds) gene copies in the fungal community estimated from amplicon sequence data,unitless,July_2021
+88,Grassy_herbs,"Understory cover of grassy herbs, measured in a 1m x 1m square around the sampling point using the Braun-Blanquet method on a scale of 0-5: groups with 75-100% coverage were scored a 5, 50-75% = 4, 25-50% = 3, 5-25% = 2, >0 - 5% = 1, 0% = 0. ",unitless,June_2022
+89,hw_basal,Basal area of all hardwood trees >5cm diameter at breast height in a 10m x 10m square plot centered between the A and B sampling points,centimeters cubed,June_2022
+90,hw_floor_litter,"Total weight of forest floor hardwood litter, measured in a 20 x 20cm square above the sampling point",grams per centimeter squared,September_2021
+91,ID,Unique sample ID,NA,NA
+92,ITS_copy_number,Copy numbers of the ITS2 DNA region per 1ul DNA extract as measured by quantitative PCR,gene copies per microliter DNA extract,July_2021
+93,Leaf_litter,"Understory cover of exposed leaf litter, measured in a 1m x 1m square around the sampling point using the Braun-Blanquet method on a scale of 0-5: groups with 75-100% coverage were scored a 5, 50-75% = 4, 25-50% = 3, 5-25% = 2, >0 - 5% = 1, 0% = 0. ",unitless,June_2022
+94,litter_depth,Litter layer depth,centimeters,September_2021
+95,long_dist_expl,Relative abundance of long distance exploration type ectomycorrhizal fungi in high-throughput amplicon sequence data,unitless,July_2021
+96,mat_expl,Relative abundance of mat exploration typeectomycorrhizal fungi in high-throughput amplicon sequence data,unitless,July_2021
+97,Max_height,Maximum height of understory vegetation,meters,June_2022
+98,med_dist_expl,Relative abundance of medium distance exploration type ectomycorrhizal fungi in high-throughput amplicon sequence data,unitless,July_2021
+99,Moss,"Understory cover of moss, measured in a 1m x 1m square around the sampling point using the Braun-Blanquet method on a scale of 0-5: groups with 75-100% coverage were scored a 5, 50-75% = 4, 25-50% = 3, 5-25% = 2, >0 - 5% = 1, 0% = 0. ",unitless,June_2022
+100,chitinase_ECbac_abund,Relative abundance of chitinase gene copies in the bacterial community estimated from amplicon sequence data,unitless,July_2021
+101,NH4_conc,ammonium concentration of the soil sample,micrograms NH4-N per gram dry soil,NA
+102,NH4uptake_ECfun_abund,Relative abundance of ammonium gene copies in the fungal community estimated from amplicon sequence data,unitless,July_2021
+103,Nitrification,Net soil nitrification rate,micrograms NO3-N per gram dry soil per day,July - August 2021
+104,nitrification_ECfun_abund,Relative abundance of nitrification gene copies in the fungal community estimated from amplicon sequence data,unitless,July_2021
+105,Nitrifier_abundance,Relative abundance of nitrifying bacteria in high-throughput amplicon sequence data,unitless,July_2021
+106,no_pine_saplings,Number of white pine saplings <5cm diameter at breast height in a 10m x 10m square plot centered between the A and B sampling points,individuals,June_2022
+107,NO3_conc,nitrate concentration of the soil sample,micrograms NH4-N per gram dry soil,NA
+108,Noxidoreductase_ECbac_abund,Relative abundance of  N-cycling oxidoreductase gene copies in the bacterial community estimated from amplicon sequence data,unitless,July_2021
+109,Noxidoreductase_ECfun_abund,Relative abundance of  N-cycling oxidoreductase gene copies in the fungal community estimated from amplicon sequence data,unitless,July_2021
+110,num_stems,Number of trees >5cm diameter at breast height in a 10m x 10m square plot centered between the A and B sampling points,Individuals,June_2022
+111,O_depth,Soil organic layer depth,centimeters,September_2021
+112,Oligotroph_abundance,Relative abundance of oligotrophic bacteria in high-throughput amplicon sequence data,unitless,July_2021
+113,Oligotroph_amidine.hydro_ECbac,Relative abundance of oligotrophic bacterial amidine hydrolase gene copies in the bacterial community estimated from amplicon sequence data,unitless,July_2021
+114,Oligotroph_amine.oxidase_ECbac,Relative abundance of oligotrophic bacterial amine oxidase gene copies in the bacterial community estimated from amplicon sequence data,unitless,July_2021
+115,Oligotroph_amino.hydro_ECbac,Relative abundance of oligotrophic bacterial amino hydrolase gene copies in the bacterial community estimated from amplicon sequence data,unitless,July_2021
+116,Oligotroph_DMhydrolase_ECbac,Relative abundance of oligotrophic bacterial diphosphoric monoester hydrolase gene copies in the bacterial community estimated from amplicon sequence data,unitless,July_2021
+117,Oligotroph_glycosidaseN_ECbac,Relative abundance of oligotrophic bacterial glycosidase (hydrolysing N-Glycosyl compounds) gene copies in the bacterial community estimated from amplicon sequence data,unitless,July_2021
+118,Oligotroph_glycosidaseOS_ECbac,Relative abundance of oligotrophic bacterial glycosidase (hydrolysing O- and S-Glycosyl compounds) gene copies in the bacterial community estimated from amplicon sequence data,unitless,July_2021
+119,Oligotroph_chitinase_ECbac,Relative abundance of oligotrophic bacterial chitinase gene copies in the bacterial community estimated from amplicon sequence data,unitless,July_2021
+120,Oligotroph_Noxidoreductase_ECbac,Relative abundance of oligotrophic bacterial N-cycling oxidoreductase gene copies in the bacterial community estimated from amplicon sequence data,unitless,July_2021
+121,Oligotroph_PDhydrolase_ECbac,Relative abundance of oligotrophic bacterial phosphoric diester hydrolase gene copies in the bacterial community estimated from amplicon sequence data,unitless,July_2021
+122,Oligotroph_peptidase_broad_ECbac,Relative abundance of oligotrophic bacterial peptidase gene copies in the bacterial community estimated from amplicon sequence data,unitless,July_2021
+123,Oligotroph_phosphatase_ECbac,Relative abundance of oligotrophic bacterial phosphatase gene copies in the bacterial community estimated from amplicon sequence data,unitless,July_2021
+124,Oligotroph_Phydrolase_ECbac,Relative abundance of oligotrophic bacterial P-targeting hydrolase gene copies in the bacterial community estimated from amplicon sequence data,unitless,July_2021
+125,Oligotroph_PMhydrolase_ECbac,Relative abundance of oligotrophic bacterial phosphoric monoester hydrolase gene copies in the bacterial community estimated from amplicon sequence data,unitless,July_2021
+126,Oligotroph_Poxidoreductase_ECbac,Relative abundance of oligotrophic bacterial P-cycling oxidoreductase gene copies in the bacterial community estimated from amplicon sequence data,unitless,July_2021
+127,Oligotroph_TMhydrolase_ECbac,Relative abundance of oligotrophic bacterial triphosphoric monoester hydrolase gene copies in the bacterial community estimated from amplicon sequence data,unitless,July_2021
+128,P,Soil total phosphous content ,micrograms per gram,July_2021
+129,PDhydrolase_ECbac_abund,Relative abundance of phosphoric diester hydrolase gene copies in the bacterial community estimated from amplicon sequence data,unitless,July_2021
+130,PDhydrolase_ECfun_abund,Relative abundance of phosphoric diester hydrolase gene copies in the fungal community estimated from amplicon sequence data,unitless,July_2021
+131,peptidase_broad_ECbac_abund,Relative abundance of peptidase gene copies in the bacterial community estimated from amplicon sequence data,unitless,July_2021
+132,peptidase_broad_ECfun_abund,Relative abundance of peptidase gene copies in the fungal community estimated from amplicon sequence data,unitless,July_2021
+133,pH,Soil pH,unitless,July_2021
+134,phosphatase_ECbac_abund,Relative abundance of phosphatase gene copies in the bacterial community estimated from amplicon sequence data,unitless,July_2021
+135,phosphatase_ECfun_abund,Relative abundance of phosphatase gene copies in the fungal community estimated from amplicon sequence data,unitless,July_2021
+136,Phydrolase_ECbac_abund,Relative abundance of P-targeting hydrolase gene copies in the bacterial community estimated from amplicon sequence data,unitless,July_2021
+137,Phydrolase_ECfun_abund,Relative abundance of P-targeting hydrolase gene copies in the fungal community estimated from amplicon sequence data,unitless,July_2021
+138,pine_basal,Basal area of all white pine trees >5cm diameter at breast height in a 10m x 10m square plot centered between the A and B sampling points,centimeters cubed,June_2022
+139,pine_floor_litter,"Total weight of forest floor pine litter, measured in a 20 x 20cm square above the sampling point",grams per centimeter squared,September_2021
+140,PMhydrolase_ECbac_abund,Relative abundance of phosphoric monoester hydrolase gene copies in the bacterial community estimated from amplicon sequence data,unitless,July_2021
+141,PMhydrolase_ECfun_abund,Relative abundance of phosphoric monoester hydrolase gene copies in the fungal community estimated from amplicon sequence data,unitless,July_2021
+142,PO4,Soil phoshphate concentration,micrograms PO4-P per gram dry soil,July_2022
+143,PO4_release,Net soil phosphate release or uptake rate,micrograms PO4-P per gram dry soil per day,July - August 2022
+144,PO4uptake_ECfun_abund,Relative abundance of phosphatase uptake gene copies in the fungal community estimated from amplicon sequence data,unitless,July_2021
+145,Poxidoreductase_ECbac_abund,Relative abundance of P-cycling oxidoreductase gene copies in the bacterial community estimated from amplicon sequence data,unitless,July_2021
+146,Poxidoreductase_ECfun_abund,Relative abundance of P-cycling oxidoreductase gene copies in the fungal community estimated from amplicon sequence data,unitless,July_2021
+147,prop_hw_litter,"Proportion of forest floor litter that is hardwood litter, measured in a 20 x 20cm square above the sampling point",unitless,September_2021
+148,prop_pine_litter,"Proportion of forest floor litter that is pine litter, measured in a 20 x 20cm square above the sampling point",unitless,September_2021
+149,PThydrolase_ECfun_abund,Relative abundance of phosphoric triester hydrolase gene copies in the fungal community estimated from amplicon sequence data,unitless,July_2021
+150,Rock,"Understory cover of exposed rock, measured in a 1m x 1m square around the sampling point using the Braun-Blanquet method on a scale of 0-5: groups with 75-100% coverage were scored a 5, 50-75% = 4, 25-50% = 3, 5-25% = 2, >0 - 5% = 1, 0% = 0. ",unitless,June_2022
+151,root_density,Root density in the top 10.2cm of soil,grams per cubic centimeter,July_2021
+152,root_endophyte_abundance,Relative abundance of root endyphytic fungi in high-throughput amplicon sequence data,unitless,July_2021
+153,SAP_abundance,Relative abundance of saprotrophic fungi in high-throughput amplicon sequence data,unitless,July_2021
+154,SAP_amidine.hydro_ECfun,Relative abundance of saprotrophic fungal amidine hydrolase gene copies in the fungal community estimated from amplicon sequence data,unitless,July_2021
+155,SAP_amine.oxidase_ECfun,Relative abundance of saprotrophic fungal amine oxidase gene copies in the fungal community estimated from amplicon sequence data,unitless,July_2021
+156,SAP_amino.hydro_ECfun,Relative abundance of saprotrophic fungal amino hydrolase gene copies in the fungal community estimated from amplicon sequence data,unitless,July_2021
+157,SAP_DMhydrolase_ECfun,Relative abundance of saprotrophic fungal diphosphoric monoester hydrolase gene copies in the fungal community estimated from amplicon sequence data,unitless,July_2021
+158,SAP_glycosidaseN_ECfun,Relative abundance of saprotrophic fungal glycosidase (hydrolysing N-Glycosyl compounds) gene copies in the fungal community estimated from amplicon sequence data,unitless,July_2021
+159,SAP_glycosidaseOS_ECfun,Relative abundance of saprotrophic fungal glycosidase (hydrolysing O- and S-Glycosyl compounds) gene copies in the fungal community estimated from amplicon sequence data,unitless,July_2021
+160,SAP_chitinase_ECfun,Relative abundance of saprotrophic fungal chitinase gene copies in the fungal community estimated from amplicon sequence data,unitless,July_2021
+161,SAP_NH4uptake_ECfun,Relative abundance of saprotrophic fungal ammonium uptake gene copies in the fungal community estimated from amplicon sequence data,unitless,July_2021
+162,SAP_Noxidoreductase_ECfun,Relative abundance of saprotrophic fungal  N-cycling oxidoreductase gene copies in the fungal community estimated from amplicon sequence data,unitless,July_2021
+163,SAP_PDhydrolase_ECfun,Relative abundance of saprotrophic fungal phosphoric diester hydrolase gene copies in the fungal community estimated from amplicon sequence data,unitless,July_2021
+164,SAP_peptidase_ECfun_broad,Relative abundance of saprotrophic fungal peptidase gene copies in the fungal community estimated from amplicon sequence data,unitless,July_2021
+165,SAP_phosphatase_ECfun,Relative abundance of saprotrophic fungal phosphatase gene copies in the fungal community estimated from amplicon sequence data,unitless,July_2021
+166,SAP_Phydrolase_ECfun,Relative abundance of saprotrophic fungal P-targeting hydrolase gene copies in the fungal community estimated from amplicon sequence data,unitless,July_2021
+167,SAP_PMhydrolase_ECfun,Relative abundance of saprotrophic fungal phosphoric monoester hydrolase gene copies in the fungal community estimated from amplicon sequence data,unitless,July_2021
+168,SAP_PO4uptake_ECfun,Relative abundance of saprotrophic fungal phosphate uptake gene copies in the fungal community estimated from amplicon sequence data,unitless,July_2021
+169,SAP_Poxidoreductase_ECfun,Relative abundance of saprotrophic fungal P-cycling oxidoreductase gene copies in the fungal community estimated from amplicon sequence data,unitless,July_2021
+170,SAP_TMhydrolase_ECfun,Relative abundance of saprotrophic fungal triphosphoric monoester hydrolase gene copies in the fungal community estimated from amplicon sequence data,unitless,July_2021
+171,short_dist_expl,Relative abundance of short distance exploration type ectomycorrhizal fungi in high-throughput amplicon sequence data,unitless,July_2021
+172,Shrubs,"Understory cover of woody shrubs, measured in a 1m x 1m square around the sampling point using the Braun-Blanquet method on a scale of 0-5: groups with 75-100% coverage were scored a 5, 50-75% = 4, 25-50% = 3, 5-25% = 2, >0 - 5% = 1, 0% = 0. ",unitless,June_2022
+173,Site,The site from which soil was sampled,NA,NA
+174,soil_moisture,Proportion soil water content by weight,unitless,July_2021
+175,soil_moisture2022,Proportion soil water content by weight in 2022,unitless,July_2022
+176,soil_percC,Soil total percent carbon,unitless,July_2021
+177,soil_percN,Soil total percent nitrogen,unitless,July_2021
+178,soil_temp,Soil temperature,celsius,July_2021
+179,soil_temp2022,Soil temperature in 2022,celsius,July_2022
+180,soilSAP_abundance,Relative abundance of soil saprotrophic fungi in high-throughput amplicon sequence data,unitless,July_2021
+181,SOM,Proportion soil organic matter content by weight,unitless,July_2021
+182,TMhydrolase_ECbac_abund,Relative abundance of triphosphoric monoester hydrolase gene copies in the bacterial community estimated from amplicon sequence data,unitless,July_2021
+183,TMhydrolase_ECfun_abund,Relative abundance of triphosphoric monoester hydrolase gene copies in the fungal community estimated from amplicon sequence data,unitless,July_2021
+184,total_basal,Cumulative basal area of all trees >5cm diameter at breast height in a 10m x 10m square plot centered between the A and B sampling points,centimeters cubed,June_2022
+185,total_floor_litter,"Total weight of forest floor litter, measured in a 20 x 20cm square above the sampling point",grams per centimeter squared,September_2021
+186,Vines,"Understory cover of vines, measured in a 1m x 1m square around the sampling point using the Braun-Blanquet method on a scale of 0-5: groups with 75-100% coverage were scored a 5, 50-75% = 4, 25-50% = 3, 5-25% = 2, >0 - 5% = 1, 0% = 0. ",unitless,June_2022
