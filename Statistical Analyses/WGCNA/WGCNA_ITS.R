@@ -162,9 +162,6 @@ dynamicColors= labels2colors(dynamicMods)
 sizeGrWindow(8,6)
 plotDendroAndColors(geneTree, dynamicColors, "Dynamic Tree Cut", dendroLabels= FALSE, hang=0.03, addGuide= TRUE, guideHang= 0.05, main= "Gene dendrogram and module colors")
 
-#save Rdata up to this point
-save.image(file = "/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/premerge_WGCNA_filt_less1samp_mod4_26Jun2023.RData")
-
 ################ MERGING ##############################
 #Merge modules whose expression profiles are very similar,
 #calculate eigengenes
@@ -349,8 +346,6 @@ module = "darkviolet" #*change this to the module we're going to look at
 ######## VSD FILES BY MODULE 
   #Making VSD files by module - so we can tell what genera are in each module
   
-setwd("/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/Filter_less1_sample/module_files/")
-  
   vs=t(datExpr0)
   cands=names(datExpr0[moduleColors=="palevioletred3"]) #*change this also to the color of module we're looking at
   
@@ -391,7 +386,7 @@ setwd("/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/Filter_less1_s
   palevioletred3
   
 # assign ASVs to taxa
-asv_taxa <- read.table("/projectnb/talbot-lab-data/cviet/White_pine/soilDNA/WP21_ITS/DADA2_output/WP21_ITS_ASV_table.txt")
+asv_taxa <- read.table("WP21_ITS_ASV_table.txt")
 asv_taxa <- asv_taxa[193:199]
 #replace the "x__" in front of each taxonomy
 asv_taxa$Kingdom <- gsub("k__","",asv_taxa$Kingdom)
@@ -401,12 +396,12 @@ asv_taxa$Order <- gsub("o__","",asv_taxa$Order)
 asv_taxa$Family <- gsub("f__","",asv_taxa$Family)
 asv_taxa$Genus <- gsub("g__","",asv_taxa$Genus)
 asv_taxa$Species <- gsub("s__","",asv_taxa$Species)
-write.csv(asv_taxa, file = "/projectnb/talbot-lab-data/cviet/White_pine/soilDNA/WP21_ITS/DADA2_output/WP21_ITS_ASV_taxonomy_list.csv")
+write.csv(asv_taxa, file = "WP21_ITS_ASV_taxonomy_list.csv")
 
 #subset for only the ASVs in the module
 palevioletred3_taxa <- asv_taxa[c(palevioletred3), ]
 palevioletred3_taxa
-write.csv(palevioletred3_taxa, file = "/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/Filter_less1_sample/module_taxa/palevioletred3_taxa.csv")
+write.csv(palevioletred3_taxa, file = "palevioletred3_taxa.csv")
 
 
 ###################### kMEs 
@@ -432,15 +427,12 @@ palevioletred3_kme_plot <- ggplot(data= palevioletred3.kme, aes(x=reorder(ASV, -
     theme(axis.text.x=element_text(angle=45,hjust=1,vjust=1)) +
     labs(x="ASV", y="kME")
 palevioletred3_kme_plot
-ggsave("palevioletred3_kme_plot_merge0.9.png", path = "/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/Filter_less1_sample/module_plots/", width=6, height=4, dpi=300)
 
 
 ############### darkviolet ###########################################################
 
 ######## VSD FILES BY MODULE 
 #Making VSD files by module - so we can tell what genera are in each module
-
-setwd("/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/Filter_less1_sample/module_files/")
 
 vs=t(datExpr0)
 cands=names(datExpr0[moduleColors=="darkviolet"]) #*change this also to the color of module we're looking at
@@ -484,7 +476,7 @@ darkviolet
 #subset for only the ASVs in the module
 darkviolet_taxa <- asv_taxa[c(darkviolet), ]
 darkviolet_taxa
-write.csv(darkviolet_taxa, file = "/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/Filter_less1_sample/module_taxa/darkviolet_taxa.csv")
+write.csv(darkviolet_taxa, file = "darkviolet_taxa.csv")
 
 
 ###################### kMEs 
@@ -510,16 +502,13 @@ darkviolet_kme_plot <- ggplot(data= darkviolet.kme, aes(x=reorder(ASV, -kMEdarkv
   theme(axis.text.x=element_text(angle=45,hjust=1,vjust=1)) +
   labs(x="ASV", y="kME")
 darkviolet_kme_plot
-ggsave("darkviolet_kme_plot_merge0.9.png", path = "/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/Filter_less1_sample/module_plots/", width=6, height=4, dpi=300)
-
+ggsave("darkviolet_kme_plot_merge0.9.png", width=6, height=4, dpi=300)
 
 
 ############### plum3 ###########################################################
 
 ######## VSD FILES BY MODULE
 #Making VSD files by module - so we can tell what genera are in each module
-
-setwd("/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/Filter_less1_sample/module_files/")
 
 vs=t(datExpr0)
 cands=names(datExpr0[moduleColors=="plum3"]) #*change this also to the color of module we're looking at
@@ -563,7 +552,7 @@ plum3
 #subset for only the ASVs in the module
 plum3_taxa <- asv_taxa[c(plum3), ]
 plum3_taxa
-write.csv(plum3_taxa, file = "/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/Filter_less1_sample/module_taxa/plum3_taxa.csv")
+write.csv(plum3_taxa, file = "plum3_taxa.csv")
 
 
 ###################### kMEs 
@@ -589,7 +578,7 @@ plum3_kme_plot <- ggplot(data= plum3.kme, aes(x=reorder(ASV, -kMEplum3), y=kMEpl
   theme(axis.text.x=element_text(angle=45,hjust=1,vjust=1)) +
   labs(x="ASV", y="kME")
 plum3_kme_plot
-ggsave("plum3_kme_plot_merge0.9.png", path = "/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/Filter_less1_sample/module_plots/", width=6, height=4, dpi=300)
+ggsave("plum3_kme_plot_merge0.9.png", width=6, height=4, dpi=300)
 
 
 
@@ -597,8 +586,6 @@ ggsave("plum3_kme_plot_merge0.9.png", path = "/projectnb/talbot-lab-data/cviet/W
 
 ######## VSD FILES BY MODULE
 #Making VSD files by module - so we can tell what genera are in each module
-
-setwd("/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/Filter_less1_sample/module_files/")
 
 vs=t(datExpr0)
 cands=names(datExpr0[moduleColors=="darkseagreen3"]) #*change this also to the color of module we're looking at
@@ -642,7 +629,7 @@ darkseagreen3
 #subset for only the ASVs in the module
 darkseagreen3_taxa <- asv_taxa[c(darkseagreen3), ]
 darkseagreen3_taxa
-write.csv(darkseagreen3_taxa, file = "/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/Filter_less1_sample/module_taxa/darkseagreen3_taxa.csv")
+write.csv(darkseagreen3_taxa, file = "darkseagreen3_taxa.csv")
 
 
 ###################### kMEs 
@@ -668,8 +655,7 @@ darkseagreen3_kme_plot <- ggplot(data= darkseagreen3.kme, aes(x=reorder(ASV, -kM
   theme(axis.text.x=element_text(angle=45,hjust=1,vjust=1)) +
   labs(x="ASV", y="kME")
 darkseagreen3_kme_plot
-ggsave("darkseagreen3_kme_plot_merge0.9.png", path = "/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/Filter_less1_sample/module_plots/", width=6, height=4, dpi=300)
-# why do some ASVs have negative kME scores???
+ggsave("darkseagreen3_kme_plot_merge0.9.png", width=6, height=4, dpi=300)
 
 
 
@@ -677,8 +663,6 @@ ggsave("darkseagreen3_kme_plot_merge0.9.png", path = "/projectnb/talbot-lab-data
 
 ######## VSD FILES BY MODULE
 #Making VSD files by module - so we can tell what genera are in each module
-
-setwd("/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/Filter_less1_sample/module_files/")
 
 vs=t(datExpr0)
 cands=names(datExpr0[moduleColors=="magenta4"]) #*change this also to the color of module we're looking at
@@ -722,7 +706,7 @@ magenta4
 #subset for only the ASVs in the module
 magenta4_taxa <- asv_taxa[c(magenta4), ]
 magenta4_taxa
-write.csv(magenta4_taxa, file = "/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/Filter_less1_sample/module_taxa/magenta4_taxa.csv")
+write.csv(magenta4_taxa, file = "magenta4_taxa.csv")
 
 
 ###################### kMEs 
@@ -748,15 +732,13 @@ magenta4_kme_plot <- ggplot(data= magenta4.kme, aes(x=reorder(ASV, -kMEmagenta4)
   theme(axis.text.x=element_text(angle=45,hjust=1,vjust=1)) +
   labs(x="ASV", y="kME")
 magenta4_kme_plot
-ggsave("magenta4_kme_plot_merge0.9.png", path = "/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/Filter_less1_sample/module_plots/", width=6, height=4, dpi=300)
+ggsave("magenta4_kme_plot_merge0.9.png", width=6, height=4, dpi=300)
 
 
 ############### floralwhite ###########################################################
 
 ######## VSD FILES BY MODULE
 #Making VSD files by module - so we can tell what genera are in each module
-
-setwd("/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/Filter_less1_sample/module_files/")
 
 vs=t(datExpr0)
 cands=names(datExpr0[moduleColors=="floralwhite"]) #*change this also to the color of module we're looking at
@@ -800,7 +782,7 @@ floralwhite
 #subset for only the ASVs in the module
 floralwhite_taxa <- asv_taxa[c(floralwhite), ]
 floralwhite_taxa
-write.csv(floralwhite_taxa, file = "/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/Filter_less1_sample/module_taxa/floralwhite_taxa.csv")
+write.csv(floralwhite_taxa, file = "floralwhite_taxa.csv")
 
 
 ###################### kMEs 
@@ -826,15 +808,13 @@ floralwhite_kme_plot <- ggplot(data= floralwhite.kme, aes(x=reorder(ASV, -kMEflo
   theme(axis.text.x=element_text(angle=45,hjust=1,vjust=1)) +
   labs(x="ASV", y="kME")
 floralwhite_kme_plot
-ggsave("floralwhite_kme_plot_merge0.9.png", path = "/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/Filter_less1_sample/module_plots/", width=6, height=4, dpi=300)
+ggsave("floralwhite_kme_plot_merge0.9.png", width=6, height=4, dpi=300)
 
 
 ############### greenyellow ###########################################################
 
 ######## VSD FILES BY MODULE
 #Making VSD files by module - so we can tell what genera are in each module
-
-setwd("/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/Filter_less1_sample/module_files/")
 
 vs=t(datExpr0)
 cands=names(datExpr0[moduleColors=="greenyellow"]) #*change this also to the color of module we're looking at
@@ -878,7 +858,7 @@ greenyellow
 #subset for only the ASVs in the module
 greenyellow_taxa <- asv_taxa[c(greenyellow), ]
 greenyellow_taxa
-write.csv(greenyellow_taxa, file = "/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/Filter_less1_sample/module_taxa/greenyellow_taxa.csv")
+write.csv(greenyellow_taxa, file = "greenyellow_taxa.csv")
 
 
 ###################### kMEs 
@@ -904,15 +884,13 @@ greenyellow_kme_plot <- ggplot(data= greenyellow.kme, aes(x=reorder(ASV, -kMEgre
   theme(axis.text.x=element_text(angle=45,hjust=1,vjust=1)) +
   labs(x="ASV", y="kME")
 greenyellow_kme_plot
-ggsave("greenyellow_kme_plot_merge0.9.png", path = "/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/Filter_less1_sample/module_plots/", width=6, height=4, dpi=300)
+ggsave("greenyellow_kme_plot_merge0.9.png", width=6, height=4, dpi=300)
 
 
 ############### darkorange2 ###########################################################
 
 ######## VSD FILES BY MODULE
 #Making VSD files by module - so we can tell what genera are in each module
-
-setwd("/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/Filter_less1_sample/module_files/")
 
 vs=t(datExpr0)
 cands=names(datExpr0[moduleColors=="darkorange2"]) #*change this also to the color of module we're looking at
@@ -956,7 +934,7 @@ darkorange2
 #subset for only the ASVs in the module
 darkorange2_taxa <- asv_taxa[c(darkorange2), ]
 darkorange2_taxa
-write.csv(darkorange2_taxa, file = "/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/Filter_less1_sample/module_taxa/darkorange2_taxa.csv")
+write.csv(darkorange2_taxa, file = "darkorange2_taxa.csv")
 
 
 ###################### kMEs 
@@ -982,15 +960,13 @@ darkorange2_kme_plot <- ggplot(data= darkorange2.kme, aes(x=reorder(ASV, -kMEdar
   theme(axis.text.x=element_text(angle=45,hjust=1,vjust=1)) +
   labs(x="ASV", y="kME")
 darkorange2_kme_plot
-ggsave("darkorange2_kme_plot_merge0.9.png", path = "/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/Filter_less1_sample/module_plots/", width=6, height=4, dpi=300)
+ggsave("darkorange2_kme_plot_merge0.9.png", width=6, height=4, dpi=300)
 
 
 ############### grey60 ###########################################################
 
 ######## VSD FILES BY MODULE
 #Making VSD files by module - so we can tell what genera are in each module
-
-setwd("/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/Filter_less1_sample/module_files/")
 
 vs=t(datExpr0)
 cands=names(datExpr0[moduleColors=="grey60"]) #*change this also to the color of module we're looking at
@@ -1034,7 +1010,7 @@ grey60
 #subset for only the ASVs in the module
 grey60_taxa <- asv_taxa[c(grey60), ]
 grey60_taxa
-write.csv(grey60_taxa, file = "/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/Filter_less1_sample/module_taxa/grey60_taxa.csv")
+write.csv(grey60_taxa, file = "grey60_taxa.csv")
 
 
 ###################### kMEs 
@@ -1060,15 +1036,13 @@ grey60_kme_plot <- ggplot(data= grey60.kme, aes(x=reorder(ASV, -kMEgrey60), y=kM
   theme(axis.text.x=element_text(angle=45,hjust=1,vjust=1)) +
   labs(x="ASV", y="kME")
 grey60_kme_plot
-ggsave("grey60_kme_plot_merge0.9.png", path = "/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/Filter_less1_sample/module_plots/", width=6, height=4, dpi=300)
+ggsave("grey60_kme_plot_merge0.9.png", width=6, height=4, dpi=300)
 
 
 ############### bisque4 ###########################################################
 
 ######## VSD FILES BY MODULE
 #Making VSD files by module - so we can tell what genera are in each module
-
-setwd("/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/Filter_less1_sample/module_files/")
 
 vs=t(datExpr0)
 cands=names(datExpr0[moduleColors=="bisque4"]) #*change this also to the color of module we're looking at
@@ -1112,7 +1086,7 @@ bisque4
 #subset for only the ASVs in the module
 bisque4_taxa <- asv_taxa[c(bisque4), ]
 bisque4_taxa
-write.csv(bisque4_taxa, file = "/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/Filter_less1_sample/module_taxa/bisque4_taxa.csv")
+write.csv(bisque4_taxa, file = "bisque4_taxa.csv")
 
 
 ###################### kMEs 
@@ -1138,15 +1112,13 @@ bisque4_kme_plot <- ggplot(data= bisque4.kme, aes(x=reorder(ASV, -kMEbisque4), y
   theme(axis.text.x=element_text(angle=45,hjust=1,vjust=1)) +
   labs(x="ASV", y="kME")
 bisque4_kme_plot
-ggsave("bisque4_kme_plot_merge0.9.png", path = "/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/Filter_less1_sample/module_plots/", width=6, height=4, dpi=300)
+ggsave("bisque4_kme_plot_merge0.9.png", width=6, height=4, dpi=300)
 
 
 ############### yellowgreen ###########################################################
 
 ######## VSD FILES BY MODULE
 #Making VSD files by module - so we can tell what genera are in each module
-
-setwd("/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/Filter_less1_sample/module_files/")
 
 vs=t(datExpr0)
 cands=names(datExpr0[moduleColors=="yellowgreen"]) #*change this also to the color of module we're looking at
@@ -1190,7 +1162,7 @@ yellowgreen
 #subset for only the ASVs in the module
 yellowgreen_taxa <- asv_taxa[c(yellowgreen), ]
 yellowgreen_taxa
-write.csv(yellowgreen_taxa, file = "/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/Filter_less1_sample/module_taxa/yellowgreen_taxa.csv")
+write.csv(yellowgreen_taxa, file = "yellowgreen_taxa.csv")
 
 
 ###################### kMEs 
@@ -1216,15 +1188,13 @@ yellowgreen_kme_plot <- ggplot(data= yellowgreen.kme, aes(x=reorder(ASV, -kMEyel
   theme(axis.text.x=element_text(angle=45,hjust=1,vjust=1)) +
   labs(x="ASV", y="kME")
 yellowgreen_kme_plot
-ggsave("yellowgreen_kme_plot_merge0.9.png", path = "/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/Filter_less1_sample/module_plots/", width=6, height=4, dpi=300)
+ggsave("yellowgreen_kme_plot_merge0.9.png", width=6, height=4, dpi=300)
 
 
 ############### paleturquoise ###########################################################
 
 ######## VSD FILES BY MODULE
 #Making VSD files by module - so we can tell what genera are in each module
-
-setwd("/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/Filter_less1_sample/module_files/")
 
 vs=t(datExpr0)
 cands=names(datExpr0[moduleColors=="paleturquoise"]) #*change this also to the color of module we're looking at
@@ -1268,7 +1238,7 @@ paleturquoise
 #subset for only the ASVs in the module
 paleturquoise_taxa <- asv_taxa[c(paleturquoise), ]
 paleturquoise_taxa
-write.csv(paleturquoise_taxa, file = "/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/Filter_less1_sample/module_taxa/paleturquoise_taxa.csv")
+write.csv(paleturquoise_taxa, file = "paleturquoise_taxa.csv")
 
 
 ###################### kMEs 
@@ -1294,15 +1264,13 @@ paleturquoise_kme_plot <- ggplot(data= paleturquoise.kme, aes(x=reorder(ASV, -kM
   theme(axis.text.x=element_text(angle=45,hjust=1,vjust=1)) +
   labs(x="ASV", y="kME")
 paleturquoise_kme_plot
-ggsave("paleturquoise_kme_plot_merge0.9.png", path = "/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/Filter_less1_sample/module_plots/", width=6, height=4, dpi=300)
+ggsave("paleturquoise_kme_plot_merge0.9.png", width=6, height=4, dpi=300)
 
 
 ############### antiquewhite1 ###########################################################
 
 ######## VSD FILES BY MODULE
 #Making VSD files by module - so we can tell what genera are in each module
-
-setwd("/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/Filter_less1_sample/module_files/")
 
 vs=t(datExpr0)
 cands=names(datExpr0[moduleColors=="antiquewhite1"]) #*change this also to the color of module we're looking at
@@ -1346,7 +1314,7 @@ antiquewhite1
 #subset for only the ASVs in the module
 antiquewhite1_taxa <- asv_taxa[c(antiquewhite1), ]
 antiquewhite1_taxa
-write.csv(antiquewhite1_taxa, file = "/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/Filter_less1_sample/module_taxa/antiquewhite1_taxa.csv")
+write.csv(antiquewhite1_taxa, file = "antiquewhite1_taxa.csv")
 
 
 ###################### kMEs 
@@ -1372,7 +1340,7 @@ antiquewhite1_kme_plot <- ggplot(data= antiquewhite1.kme, aes(x=reorder(ASV, -kM
   theme(axis.text.x=element_text(angle=45,hjust=1,vjust=1)) +
   labs(x="ASV", y="kME")
 antiquewhite1_kme_plot
-ggsave("antiquewhite1_kme_plot_merge0.9.png", path = "/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/Filter_less1_sample/module_plots/", width=6, height=4, dpi=300)
+ggsave("antiquewhite1_kme_plot_merge0.9.png", width=6, height=4, dpi=300)
 
 
 
@@ -1380,8 +1348,6 @@ ggsave("antiquewhite1_kme_plot_merge0.9.png", path = "/projectnb/talbot-lab-data
 
 ######## VSD FILES BY MODULE
 #Making VSD files by module - so we can tell what genera are in each module
-
-setwd("/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/Filter_less1_sample/module_files/")
 
 vs=t(datExpr0)
 cands=names(datExpr0[moduleColors=="darkmagenta"]) #*change this also to the color of module we're looking at
@@ -1425,7 +1391,7 @@ darkmagenta
 #subset for only the ASVs in the module
 darkmagenta_taxa <- asv_taxa[c(darkmagenta), ]
 darkmagenta_taxa
-write.csv(darkmagenta_taxa, file = "/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/Filter_less1_sample/module_taxa/darkmagenta_taxa.csv")
+write.csv(darkmagenta_taxa, file = "darkmagenta_taxa.csv")
 
 
 ###################### kMEs 
@@ -1451,15 +1417,13 @@ darkmagenta_kme_plot <- ggplot(data= darkmagenta.kme, aes(x=reorder(ASV, -kMEdar
   theme(axis.text.x=element_text(angle=45,hjust=1,vjust=1)) +
   labs(x="ASV", y="kME")
 darkmagenta_kme_plot
-ggsave("darkmagenta_kme_plot_merge0.9.png", path = "/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/Filter_less1_sample/module_plots/", width=6, height=4, dpi=300)
+ggsave("darkmagenta_kme_plot_merge0.9.png", width=6, height=4, dpi=300)
 
 
 ############### orangered4 ###########################################################
 
 ######## VSD FILES BY MODULE
 #Making VSD files by module - so we can tell what genera are in each module
-
-setwd("/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/Filter_less1_sample/module_files/")
 
 vs=t(datExpr0)
 cands=names(datExpr0[moduleColors=="orangered4"]) #*change this also to the color of module we're looking at
@@ -1503,7 +1467,7 @@ orangered4
 #subset for only the ASVs in the module
 orangered4_taxa <- asv_taxa[c(orangered4), ]
 orangered4_taxa
-write.csv(orangered4_taxa, file = "/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/Filter_less1_sample/module_taxa/orangered4_taxa.csv")
+write.csv(orangered4_taxa, file = "orangered4_taxa.csv")
 
 
 ###################### kMEs 
@@ -1529,15 +1493,13 @@ orangered4_kme_plot <- ggplot(data= orangered4.kme, aes(x=reorder(ASV, -kMEorang
   theme(axis.text.x=element_text(angle=45,hjust=1,vjust=1)) +
   labs(x="ASV", y="kME")
 orangered4_kme_plot
-ggsave("orangered4_kme_plot_merge0.9.png", path = "/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/Filter_less1_sample/module_plots/", width=6, height=4, dpi=300)
+ggsave("orangered4_kme_plot_merge0.9.png", width=6, height=4, dpi=300)
 
 
 ############### darkseagreen4 ###########################################################
 
 ######## VSD FILES BY MODULE
 #Making VSD files by module - so we can tell what genera are in each module
-
-setwd("/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/Filter_less1_sample/module_files/")
 
 vs=t(datExpr0)
 cands=names(datExpr0[moduleColors=="darkseagreen4"]) #*change this also to the color of module we're looking at
@@ -1581,7 +1543,7 @@ darkseagreen4
 #subset for only the ASVs in the module
 darkseagreen4_taxa <- asv_taxa[c(darkseagreen4), ]
 darkseagreen4_taxa
-write.csv(darkseagreen4_taxa, file = "/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/Filter_less1_sample/module_taxa/darkseagreen4_taxa.csv")
+write.csv(darkseagreen4_taxa, file = "darkseagreen4_taxa.csv")
 
 
 ###################### kMEs 
@@ -1607,16 +1569,13 @@ darkseagreen4_kme_plot <- ggplot(data= darkseagreen4.kme, aes(x=reorder(ASV, -kM
   theme(axis.text.x=element_text(angle=45,hjust=1,vjust=1)) +
   labs(x="ASV", y="kME")
 darkseagreen4_kme_plot
-ggsave("darkseagreen4_kme_plot_merge0.9.png", path = "/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/Filter_less1_sample/module_plots/", width=6, height=4, dpi=300)
-
+ggsave("darkseagreen4_kme_plot_merge0.9.png", width=6, height=4, dpi=300)
 
 
 ############### red3 ###########################################################
 
 ######## VSD FILES BY MODULE
 #Making VSD files by module - so we can tell what genera are in each module
-
-setwd("/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/Filter_less1_sample/module_files/")
 
 vs=t(datExpr0)
 cands=names(datExpr0[moduleColors=="red3"]) #*change this also to the color of module we're looking at
@@ -1660,7 +1619,7 @@ red3
 #subset for only the ASVs in the module
 red3_taxa <- asv_taxa[c(red3), ]
 red3_taxa
-write.csv(red3_taxa, file = "/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/Filter_less1_sample/module_taxa/red3_taxa.csv")
+write.csv(red3_taxa, file = "red3_taxa.csv")
 
 
 ###################### kMEs 
@@ -1686,16 +1645,13 @@ red3_kme_plot <- ggplot(data= red3.kme, aes(x=reorder(ASV, -kMEred3), y=kMEred3)
   theme(axis.text.x=element_text(angle=45,hjust=1,vjust=1)) +
   labs(x="ASV", y="kME")
 red3_kme_plot
-ggsave("red3_kme_plot_merge0.9.png", path = "/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/Filter_less1_sample/module_plots/", width=6, height=4, dpi=300)
-
+ggsave("red3_kme_plot_merge0.9.png", width=6, height=4, dpi=300)
 
 
 ############### coral3 ###########################################################
 
 ######## VSD FILES BY MODULE
 #Making VSD files by module - so we can tell what genera are in each module
-
-setwd("/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/Filter_less1_sample/module_files/")
 
 vs=t(datExpr0)
 cands=names(datExpr0[moduleColors=="coral3"]) #*change this also to the color of module we're looking at
@@ -1739,7 +1695,7 @@ coral3
 #subset for only the ASVs in the module
 coral3_taxa <- asv_taxa[c(coral3), ]
 coral3_taxa
-write.csv(coral3_taxa, file = "/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/Filter_less1_sample/module_taxa/coral3_taxa.csv")
+write.csv(coral3_taxa, file = "coral3_taxa.csv")
 
 
 ###################### kMEs 
@@ -1765,53 +1721,52 @@ coral3_kme_plot <- ggplot(data= coral3.kme, aes(x=reorder(ASV, -kMEcoral3), y=kM
   theme(axis.text.x=element_text(angle=45,hjust=1,vjust=1)) +
   labs(x="ASV", y="kME")
 coral3_kme_plot
-ggsave("coral3_kme_plot_merge0.9.png", path = "/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/Filter_less1_sample/module_plots/", width=6, height=4, dpi=300)
+ggsave("coral3_kme_plot_merge0.9.png", width=6, height=4, dpi=300)
 
 
-
-################## checking if most ASVs in one module are from the same sites #######################
+#########################################
 
 its_asv_1_palevioletred3 <- its_asv_1[,c(palevioletred3)]
-write.csv(its_asv_1_palevioletred3, file = "/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/Filter_less1_sample/module_files/its_asv_1_palevioletred3.csv")  
+write.csv(its_asv_1_palevioletred3, file = "its_asv_1_palevioletred3.csv")  
 
 its_asv_1_plum3 <- its_asv_1[,c(plum3)]
-write.csv(its_asv_1_plum3, file = "/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/Filter_less1_sample/module_files/its_asv_1_plum3.csv")  
+write.csv(its_asv_1_plum3, file = "its_asv_1_plum3.csv")  
 
 its_asv_1_darkseagreen3 <- its_asv_1[,c(darkseagreen3)]
-write.csv(its_asv_1_darkseagreen3, file = "/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/Filter_less1_sample/module_files/its_asv_1_darkseagreen3.csv")  
+write.csv(its_asv_1_darkseagreen3, file = "its_asv_1_darkseagreen3.csv")  
 
 its_asv_1_magenta4 <- its_asv_1[,c(magenta4)]
-write.csv(its_asv_1_magenta4, file = "/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/Filter_less1_sample/module_files/its_asv_1_magenta4.csv")  
+write.csv(its_asv_1_magenta4, file = "its_asv_1_magenta4.csv")  
 
 its_asv_1_floralwhite <- its_asv_1[,c(floralwhite)]
-write.csv(its_asv_1_floralwhite, file = "/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/Filter_less1_sample/module_files/its_asv_1_floralwhite.csv")  
+write.csv(its_asv_1_floralwhite, file = "its_asv_1_floralwhite.csv")  
 
 its_asv_1_greenyellow <- its_asv_1[,c(greenyellow)]
-write.csv(its_asv_1_greenyellow, file = "/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/Filter_less1_sample/module_files/its_asv_1_greenyellow.csv")  
+write.csv(its_asv_1_greenyellow, file = "its_asv_1_greenyellow.csv")  
 
 its_asv_1_darkorange2 <- its_asv_1[,c(darkorange2)]
-write.csv(its_asv_1_darkorange2, file = "/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/Filter_less1_sample/module_files/its_asv_1_darkorange2.csv")  
+write.csv(its_asv_1_darkorange2, file = "its_asv_1_darkorange2.csv")  
 
 its_asv_1_grey60 <- its_asv_1[,c(grey60)]
-write.csv(its_asv_1_grey60, file = "/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/Filter_less1_sample/module_files/its_asv_1_grey60.csv")  
+write.csv(its_asv_1_grey60, file = "its_asv_1_grey60.csv")  
 
 its_asv_1_bisque4 <- its_asv_1[,c(bisque4)]
-write.csv(its_asv_1_bisque4, file = "/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/Filter_less1_sample/module_files/its_asv_1_bisque4.csv")  
+write.csv(its_asv_1_bisque4, file = "its_asv_1_bisque4.csv")  
 
 its_asv_1_yellowgreen <- its_asv_1[,c(yellowgreen)]
-write.csv(its_asv_1_yellowgreen, file = "/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/Filter_less1_sample/module_files/its_asv_1_yellowgreen.csv")  
+write.csv(its_asv_1_yellowgreen, file = "its_asv_1_yellowgreen.csv")  
 
 its_asv_1_paleturquoise <- its_asv_1[,c(paleturquoise)]
-write.csv(its_asv_1_paleturquoise, file = "/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/Filter_less1_sample/module_files/its_asv_1_paleturquoise.csv")  
+write.csv(its_asv_1_paleturquoise, file = "its_asv_1_paleturquoise.csv")  
 
 its_asv_1_antiquewhite1 <- its_asv_1[,c(antiquewhite1)]
-write.csv(its_asv_1_antiquewhite1, file = "/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/Filter_less1_sample/module_files/its_asv_1_antiquewhite1.csv")  
+write.csv(its_asv_1_antiquewhite1, file = "its_asv_1_antiquewhite1.csv")  
 
 its_asv_1_darkmagenta <- its_asv_1[,c(darkmagenta)]
-write.csv(its_asv_1_darkmagenta, file = "/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/Filter_less1_sample/module_files/its_asv_1_darkmagenta.csv")  
+write.csv(its_asv_1_darkmagenta, file = "its_asv_1_darkmagenta.csv")  
 
 its_asv_1_coral3 <- its_asv_1[,c(coral3)]
-write.csv(its_asv_1_coral3, file = "/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/Filter_less1_sample/module_files/its_asv_1_coral3.csv")  
+write.csv(its_asv_1_coral3, file = "its_asv_1_coral3.csv")  
 #########################################################
 
 mod_list <- c("palevioletred3", "darkviolet", "plum3", "darkseagreen3", "magenta4", "floralwhite", "greenyellow", "darkorange2", "grey60", "bisque4", "yellowgreen", "paleturquoise", "antiquewhite1", "darkmagenta", "yellowgreen", "orangered4", "darkseagreen4", "red3", "coral3")
@@ -1819,7 +1774,7 @@ mod_list <- c("palevioletred3", "darkviolet", "plum3", "darkseagreen3", "magenta
 # read in all kME files
 for (x in 1:19) {
   filename <- paste(mod_list[x],".kME", sep="") 
-  wd <- paste("/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/Filter_less1_sample/module_files/", mod_list[x], "_kME.csv", sep="")
+  wd <- paste("", mod_list[x], "_kME.csv", sep="")
   assign(filename, read.csv(wd))
 }
 
@@ -1829,7 +1784,7 @@ kME_subset_list <- list()
 
 # Create a dataframe with all the ASVs by module and select for ASVs with kMEs >0.66
 for (x in 1:19) {
-wd <- paste("/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/Filter_less1_sample/module_files/", mod_list[x], "_kME.csv", sep="")
+wd <- paste("", mod_list[x], "_kME.csv", sep="")
 df <- read.csv(wd, col.names = c("ASV", "kME"))
 df$module_name <- mod_list[x] #create a column with the module name
 kME_full_list[[x]] <- df #put each new dataframe in a list
@@ -1843,7 +1798,5 @@ asv_taxa2 <- asv_taxa
 asv_taxa2$ASV <- rownames(asv_taxa2)
 kME_taxa_66 <- merge(kME_subset_df, asv_taxa2, by = "ASV", all.x = TRUE)
 
-write.csv(kME_taxa_66, file = "/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/Filter_less1_sample/key_taxa_WGCNA_ITS_merge0.9_kME0.66.csv")
+write.csv(kME_taxa_66, file = "key_taxa_WGCNA_ITS_merge0.9_kME0.66.csv")
 
-
-kME_full_df[kME_full_df[,2] > .2,]

@@ -166,9 +166,6 @@ dynamicColors= labels2colors(dynamicMods)
 sizeGrWindow(8,6)
 plotDendroAndColors(geneTree, dynamicColors, "Dynamic Tree Cut", dendroLabels= FALSE, hang=0.03, addGuide= TRUE, guideHang= 0.05, main= "Gene dendrogram and module colors")
 
-#save Rdata up to this point
-save.image(file = "/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/premerge_WGCNA_filt_less1samp_mod4_06Jul2023.RData")
-
 ################ MERGING ##############################
 #Merge modules whose expression profiles are very similar, 
 #calculate eigengenes
@@ -353,8 +350,6 @@ module = "green" #*change this to the module we're going to look at
   ######## VSD FILES BY MODULE 
   #Making VSD files by module - so we can tell what genera are in each module
   
-  setwd("/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/16S/module_files/")
-  
   vs=t(datExpr0)
   cands=names(datExpr0[moduleColors==mod]) #*change this also to the color of module we're looking at
   
@@ -394,15 +389,10 @@ module = "green" #*change this to the module we're going to look at
   mod_ASVs <- row.names(mod_ASVs)
   mod_ASVs
   
-  # assign ASVs to taxa - ONLY NEED TO RUN ONCE
-  #asv_taxa <- read.table("/projectnb/talbot-lab-data/cviet/White_pine/soilDNA/WP21_16S/DADA2_output/WP21_16S_ASV_table.txt")
-  #asv_taxa <- asv_taxa[206:212]
-  #write.csv(asv_taxa, file = "/projectnb/talbot-lab-data/cviet/White_pine/soilDNA/WP21_ITS/DADA2_output/WP21_ITS_ASV_taxonomy_list.csv")
-  
   #subset for only the ASVs in the module
   mod_taxa <- asv_taxa[c(mod_ASVs), ]
   mod_taxa
-  write.csv(mod_taxa, file = paste("/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/16S/module_files/module_taxa/",mod,"_taxa.csv", sep=""))
+  write.csv(mod_taxa, file = paste("module_taxa/",mod,"_taxa.csv", sep=""))
   
   
   ###################### kMEs 
@@ -428,54 +418,54 @@ module = "green" #*change this to the module we're going to look at
     theme(axis.text.x=element_text(angle=45,hjust=1,vjust=1)) +
     labs(x="ASV", y="kME")
   mod_kme_plot
-  ggsave(paste(mod, "_kme_plot_merge0.8.png", sep=""), path = "/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/16S/module_files/module_plots/", width=6, height=4, dpi=300)
+  ggsave(paste(mod, "_kme_plot_merge0.8.png", sep=""), width=6, height=4, dpi=300)
 
 #############################################################################################
 ###read in all module taxa and kMEs###
   
-white1.kME <- read.csv("/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/16S/module_files/white1_kME.csv")
-lightsteelblue.kME <- read.csv("/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/16S/module_files/lightsteelblue_kME.csv")
-saddlebrown.kME <- read.csv("/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/16S/module_files/saddlebrown_kME.csv")
-antiquewhite4.kME <- read.csv("/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/16S/module_files/antiquewhite4_kME.csv")
-greenyellow.kME <- read.csv("/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/16S/module_files/greenyellow_kME.csv")
-cyan.kME <- read.csv("/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/16S/module_files/cyan_kME.csv")
-indianred4.kME <- read.csv("/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/16S/module_files/indianred4_kME.csv")
-plum2.kME <- read.csv("/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/16S/module_files/plum2_kME.csv")
-violet.kME <- read.csv("/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/16S/module_files/violet_kME.csv")
-darkseagreen4.kME <- read.csv("/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/16S/module_files/darkseagreen4_kME.csv")
-lightcyan1.kME <- read.csv("/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/16S/module_files/lightcyan1_kME.csv")
-blue2.kME <- read.csv("/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/16S/module_files/blue2_kME.csv")
-blue.kME <- read.csv("/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/16S/module_files/blue_kME.csv")
-darkgreen.kME <- read.csv("/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/16S/module_files/darkgreen_kME.csv")
-floralwhite.kME <- read.csv("/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/16S/module_files/blue_kME.csv")
-bisque4.kME <- read.csv("/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/16S/module_files/floralwhite_kME.csv")
-brown.kME <- read.csv("/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/16S/module_files/bisque4_kME.csv")
-palevioletred2.kME <- read.csv("/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/16S/module_files/palevioletred2_kME.csv")
-brown4.kME <- read.csv("/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/16S/module_files/brown4_kME.csv")
-green.kME <- read.csv("/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/16S/module_files/green_kME.csv")
+white1.kME <- read.csv("white1_kME.csv")
+lightsteelblue.kME <- read.csv("lightsteelblue_kME.csv")
+saddlebrown.kME <- read.csv("saddlebrown_kME.csv")
+antiquewhite4.kME <- read.csv("antiquewhite4_kME.csv")
+greenyellow.kME <- read.csv("greenyellow_kME.csv")
+cyan.kME <- read.csv("cyan_kME.csv")
+red4.kME <- read.csv("red4_kME.csv")
+plum2.kME <- read.csv("plum2_kME.csv")
+violet.kME <- read.csv("violet_kME.csv")
+darkseagreen4.kME <- read.csv("darkseagreen4_kME.csv")
+lightcyan1.kME <- read.csv("lightcyan1_kME.csv")
+blue2.kME <- read.csv("blue2_kME.csv")
+blue.kME <- read.csv("blue_kME.csv")
+darkgreen.kME <- read.csv("darkgreen_kME.csv")
+floralwhite.kME <- read.csv("blue_kME.csv")
+bisque4.kME <- read.csv("floralwhite_kME.csv")
+brown.kME <- read.csv("bisque4_kME.csv")
+palevioletred2.kME <- read.csv("palevioletred2_kME.csv")
+brown4.kME <- read.csv("brown4_kME.csv")
+green.kME <- read.csv("green_kME.csv")
 
-white1.taxa <- read.csv("/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/16S/module_files/module_taxa/white1_taxa.csv")
-lightsteelblue.taxa <- read.csv("/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/16S/module_files/module_taxa/lightsteelblue_taxa.csv")
-saddlebrown.taxa <- read.csv("/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/16S/module_files/module_taxa/saddlebrown_taxa.csv")
-antiquewhite4.taxa <- read.csv("/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/16S/module_files/module_taxa/antiquewhite4_taxa.csv")
-greenyellow.taxa <- read.csv("/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/16S/module_files/module_taxa/greenyellow_taxa.csv")
-cyan.taxa <- read.csv("/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/16S/module_files/module_taxa/cyan_taxa.csv")
-indianred4.taxa <- read.csv("/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/16S/module_files/module_taxa/indianred4_taxa.csv")
-plum2.taxa <- read.csv("/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/16S/module_files/module_taxa/plum2_taxa.csv")
-violet.taxa <- read.csv("/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/16S/module_files/module_taxa/violet_taxa.csv")
-darkseagreen4.taxa <- read.csv("/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/16S/module_files/module_taxa/darkseagreen4_taxa.csv")
-lightcyan1.taxa <- read.csv("/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/16S/module_files/module_taxa/lightcyan1_taxa.csv")
-blue2.taxa <- read.csv("/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/16S/module_files/module_taxa/blue2_taxa.csv")
-blue.taxa <- read.csv("/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/16S/module_files/module_taxa/blue_taxa.csv")
-darkgreen.taxa <- read.csv("/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/16S/module_files/module_taxa/darkgreen_taxa.csv")
-floralwhite.taxa <- read.csv("/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/16S/module_files/module_taxa/blue_taxa.csv")
-bisque4.taxa <- read.csv("/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/16S/module_files/module_taxa/floralwhite_taxa.csv")
-brown.taxa <- read.csv("/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/16S/module_files/module_taxa/bisque4_taxa.csv")
-palevioletred2.taxa <- read.csv("/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/16S/module_files/module_taxa/palevioletred2_taxa.csv")
-brown4.taxa <- read.csv("/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/16S/module_files/module_taxa/brown4_taxa.csv")
-green.taxa <- read.csv("/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/16S/module_files/module_taxa/green_taxa.csv")
+white1.taxa <- read.csv("module_taxa/white1_taxa.csv")
+lightsteelblue.taxa <- read.csv("module_taxa/lightsteelblue_taxa.csv")
+saddlebrown.taxa <- read.csv("module_taxa/saddlebrown_taxa.csv")
+antiquewhite4.taxa <- read.csv("module_taxa/antiquewhite4_taxa.csv")
+greenyellow.taxa <- read.csv("module_taxa/greenyellow_taxa.csv")
+cyan.taxa <- read.csv("module_taxa/cyan_taxa.csv")
+red4.taxa <- read.csv("module_taxa/red4_taxa.csv")
+plum2.taxa <- read.csv("module_taxa/plum2_taxa.csv")
+violet.taxa <- read.csv("module_taxa/violet_taxa.csv")
+darkseagreen4.taxa <- read.csv("module_taxa/darkseagreen4_taxa.csv")
+lightcyan1.taxa <- read.csv("module_taxa/lightcyan1_taxa.csv")
+blue2.taxa <- read.csv("module_taxa/blue2_taxa.csv")
+blue.taxa <- read.csv("module_taxa/blue_taxa.csv")
+darkgreen.taxa <- read.csv("module_taxa/darkgreen_taxa.csv")
+floralwhite.taxa <- read.csv("module_taxa/blue_taxa.csv")
+bisque4.taxa <- read.csv("module_taxa/floralwhite_taxa.csv")
+brown.taxa <- read.csv("module_taxa/bisque4_taxa.csv")
+palevioletred2.taxa <- read.csv("module_taxa/palevioletred2_taxa.csv")
+brown4.taxa <- read.csv("module_taxa/brown4_taxa.csv")
+green.taxa <- read.csv("module_taxa/green_taxa.csv")
 
-kME.list <- c(white1.kME, lightsteelblue.kME, saddlebrown.kME, antiquewhite4.kME, greenyellow.kME, cyan.kME, indianred4.kME, plum2.kME, violet.kME, darkseagreen4.kME, lightcyan1.kME, blue2.kME, darkgreen.kME, floralwhite.kME, bisque4.kME, brown.kME, palevioletred2.kME, brown4.kME, green.kME)
+kME.list <- c(white1.kME, lightsteelblue.kME, saddlebrown.kME, antiquewhite4.kME, greenyellow.kME, cyan.kME, red4.kME, plum2.kME, violet.kME, darkseagreen4.kME, lightcyan1.kME, blue2.kME, darkgreen.kME, floralwhite.kME, bisque4.kME, brown.kME, palevioletred2.kME, brown4.kME, green.kME)
 
 #subset for ASVs with a kME of > 0.66
 white1.kME.66 <- white1.kME[white1.kME[2] > 0.66,]
@@ -484,7 +474,7 @@ saddlebrown.kME.66 <- saddlebrown.kME[saddlebrown.kME[2] > 0.66 ,]
 antiquewhite4.kME.66 <- antiquewhite4.kME[antiquewhite4.kME[2] > 0.66,]
 greenyellow.kME.66 <- greenyellow.kME[greenyellow.kME[2] > 0.66,]
 cyan.kME.66 <- cyan.kME[cyan.kME[2] > 0.66,]
-indianred4.kME.66 <- indianred4.kME[indianred4.kME[2] > 0.66,]
+red4.kME.66 <- red4.kME[red4.kME[2] > 0.66,]
 plum2.kME.66 <- plum2.kME[plum2.kME[2] > 0.66,]
 violet.kME.66 <- violet.kME[violet.kME[2] > 0.66,]
 darkseagreen4.kME.66 <- darkseagreen4.kME[darkseagreen4.kME[2] > 0.66,]
@@ -506,7 +496,7 @@ saddlebrown.taxa.66 <- saddlebrown.taxa[saddlebrown.taxa$X %in% saddlebrown.kME.
 antiquewhite4.taxa.66 <- antiquewhite4.taxa[antiquewhite4.taxa$X %in% antiquewhite4.kME.66$X,]
 greenyellow.taxa.66 <- greenyellow.taxa[greenyellow.taxa$X %in% greenyellow.kME.66$X,]
 cyan.taxa.66 <- cyan.taxa[cyan.taxa$X %in% cyan.kME.66$X,]
-indianred4.taxa.66 <- indianred4.taxa[indianred4.taxa$X %in% indianred4.kME.66$X,]
+red4.taxa.66 <- red4.taxa[red4.taxa$X %in% red4.kME.66$X,]
 plum2.taxa.66 <- plum2.taxa[plum2.taxa$X %in% plum2.kME.66$X,]
 violet.taxa.66 <- violet.taxa[violet.taxa$X %in% violet.kME.66$X,]
 darkseagreen4.taxa.66 <- darkseagreen4.taxa[darkseagreen4.taxa$X %in% darkseagreen4.kME.66$X,]
@@ -528,7 +518,7 @@ saddlebrown.taxa.66$module <- "saddlebrown"
 antiquewhite4.taxa.66$module <- "antiquewhite4"
 greenyellow.taxa.66$module <- "greenyellow"
 cyan.taxa.66$module <- "cyan"
-indianred4.taxa.66$module <- "ired4"
+red4.taxa.66$module <- "ired4"
 plum2.taxa.66$module <- "plum2"
 violet.taxa.66$module <- "violet"
 darkseagreen4.taxa.66$module <- "darkseagreen4"
@@ -544,22 +534,9 @@ brown4.taxa.66$module <- "brown4"
 green.taxa.66$module <- "green"
 
 #combine all into one dataframe
-key_taxa <- rbind(white1.taxa.66, lightsteelblue.taxa.66, saddlebrown.taxa.66, antiquewhite4.taxa.66, blue.taxa.66, greenyellow.taxa.66, cyan.taxa.66, indianred4.taxa.66, plum2.taxa.66, violet.taxa.66, darkseagreen4.taxa.66, lightcyan1.taxa.66, blue2.taxa.66, darkgreen.taxa.66, floralwhite.taxa.66, bisque4.taxa.66, brown.taxa.66, palevioletred2.taxa.66, brown4.taxa.66, green.taxa.66)
+key_taxa <- rbind(white1.taxa.66, lightsteelblue.taxa.66, saddlebrown.taxa.66, antiquewhite4.taxa.66, blue.taxa.66, greenyellow.taxa.66, cyan.taxa.66, red4.taxa.66, plum2.taxa.66, violet.taxa.66, darkseagreen4.taxa.66, lightcyan1.taxa.66, blue2.taxa.66, darkgreen.taxa.66, floralwhite.taxa.66, bisque4.taxa.66, brown.taxa.66, palevioletred2.taxa.66, brown4.taxa.66, green.taxa.66)
 colnames(key_taxa)[1] <- "ASV_no"
 
-write.csv(key_taxa, file = "/projectnb/talbot-lab-data/cviet/White_pine/Analyses/WGCNA/16S/WP21_WGCNA_16S_key_taxa_merge0.8_06Jul23.csv")
-
-
-
-
-
-
-
-modtaxa.list <- c(white1.taxa, lightsteelblue.taxa, saddlebrown.taxa, antiquewhite4.taxa, greenyellow.taxa, cyan.taxa, indianred4.taxa, plum2.taxa, violet.taxa, darkseagreen4.taxa, lightcyan1.taxa, blue2.taxa, darkgreen.taxa, floralwhite.taxa, bisque4.taxa, brown.taxa, palevioletred2.taxa, brown4.taxa, green.taxa)
-
-high_kme <- lapply(kME.list2, function(x) x[x[2] > 0.85])
-
-green.kME.85 <- green.kME[green.kME[2] > 0.85]
-
+write.csv(key_taxa, file = "WP21_WGCNA_16S_key_taxa_merge0.8_06Jul23.csv")
 
 
