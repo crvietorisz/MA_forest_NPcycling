@@ -186,7 +186,7 @@ Poxidored.plot
 # TEST LINEAR MODEL ASSUMPTIONS
 ##############################################################################################################################
 
-# use for models explaining net ammonification and net phosphate change
+# use for models explaining net ammonification and net phosphate change (non-zero inflated models)
 
 #RESIDUALS PLOT
 
