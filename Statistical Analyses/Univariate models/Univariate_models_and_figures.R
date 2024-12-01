@@ -170,7 +170,7 @@ bacmodule.nitrif.plot
 # Stats
 Poxidored.amm <- lmer(PO4_release ~ Poxidoreductase_ECfun_abund + (1|Site), data = sub_dist)
 summary(Poxidored.amm)
-pt(q=3.207, df=length(na.omit(sub_dist$Ammonification)-2), lower.tail=FALSE) #get p value - MUST INPUT T STAT!
+pt(q=3.207, df=length(na.omit(sub_dist$PO4_release)-2), lower.tail=FALSE) #get p value - MUST INPUT T STAT!
 MuMIn::r.squaredGLMM(Poxidored.amm) #get Rsquared value - R2c is the conditional R2 and is variance explained by entire model
 
 # Figure
