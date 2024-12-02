@@ -58,8 +58,6 @@ AIC(mod.full) # 39.15
 ########################### Model selection rounds ####################################
 
 ######## ROUND 1 ###########
-
-# not including ITS copy number because the model is unable to run when this variable is present
 vars_sel_1 <- c(
      "litter_depth",
      "denitrification_ECbac_abund",
