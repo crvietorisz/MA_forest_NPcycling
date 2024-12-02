@@ -45,10 +45,6 @@ p + coord_cartesian(xlim = c(-0.3, 0.35))
 
 
 ########################### Make full model ####################################
-#mod.full <- glmmTMB((Nitrification+0.01) ~ litter_depth + denitrification_ECbac_abund + EMF_Shannon + bac_shannon + Ferns + Nitrifier_abundance + pH + Copiotroph_abundance + num_stems + bac_nitr_pos_module_abundance + ITS_copy_number,
-#               data = sub_dist,
-#               ziformula = ~ 1,
-#               family = Gamma(link = "log"))
 
 mod.full <- glmmTMB((Nitrification+0.01) ~ litter_depth + denitrification_ECbac_abund + med_dist_expl + bac_shannon + Ferns + Nitrifier_abundance + pH + Copiotroph_abundance + num_stems + bac_nitr_pos_module_abundance, 
                     data = sub_dist,
