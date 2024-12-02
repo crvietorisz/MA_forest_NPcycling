@@ -186,6 +186,7 @@ TMhydrolase_ECbac_abund,Relative abundance of triphosphoric monoester hydrolase 
 TMhydrolase_ECfun_abund,Relative abundance of triphosphoric monoester hydrolase gene copies in the fungal community estimated from amplicon sequence data,unitless,July_2021
 total_basal,Cumulative basal area of all trees >5cm diameter at breast height in a 10m x 10m square plot centered between the A and B sampling points,centimeters cubed,June_2022
 total_floor_litter,"Total weight of forest floor litter, measured in a 20 x 20cm square above the sampling point",grams per centimeter squared,September_2021
+Transect_coordinates,"Geographic coordinates of the transect formatted as: latitude, longitude",decimal degrees,NA
 Vines,"Understory cover of vines, measured in a 1m x 1m square around the sampling point using the Braun-Blanquet method on a scale of 0-5: groups with 75-100% coverage were scored a 5, 50-75% = 4, 25-50% = 3, 5-25% = 2, >0 - 5% = 1, 0% = 0. ",unitless,June_2022
 Litterfall_wt,Total annual litterfall weight within a 33 cm x 33 cm litterfall collection basket  ,grams ,Sept 2021 - Sept 2022
 Litterfall_wt_only_leaves,"Total annual litterfall weight of only leaf litter (excluding branches, cones, and other debris) within a 33 cm x 33 cm litterfall collection basket  ",grams ,Sept 2021 - Sept 2022
