@@ -92,10 +92,11 @@ amm_cp3_aic_df <- merge(amm_cp3_aic_df, cp3, by = "Cp-p")
 
 Ammon.lmer.1 <- lmer(sqrt(Ammonification) ~ edaphic_PC1 + ECM_abundance + (1|Site), data = sub_dist)
 summary(Ammon.lmer.1)
-pt(q=-5.895, df=length(na.omit(sub_dist$Ammonification)-2), lower.tail=TRUE) #edaphic PC1 - 2e-08
+pt(q=-5.895, df=87, lower.tail=TRUE) #edaphic PC1 - 2e-08
 pt(q=2.914, df=length(na.omit(sub_dist$Ammonification)-2), lower.tail=FALSE) #ECM_abundance - 0.002
 MuMIn::r.squaredGLMM(Ammon.lmer.1) #R2m = 0.38, R2c = 0.42
 AIC(Ammon.lmer.1) # 328.8
+anova(Ammon.lmer.1)
 
 Ammon.lmer.2 <- lmer(sqrt(Ammonification) ~ edaphic_PC1 + fun_amm_pos_module_abundance + (1|Site), data = sub_dist)
 summary(Ammon.lmer.2)
@@ -103,6 +104,7 @@ pt(q=-6.221, df=length(na.omit(sub_dist$Ammonification)-2), lower.tail=TRUE) #ed
 pt(q=3.045, df=length(na.omit(sub_dist$Ammonification)-2), lower.tail=FALSE) #fun_amm_pos_module_abundance - 0.001
 MuMIn::r.squaredGLMM(Ammon.lmer.2) #R2m = 0.38, R2c = 0.42
 AIC(Ammon.lmer.2) # 328.3
+anova(Ammon.lmer.2)
 
 ######## assess linear independence of predictors
 plot(sub_dist$edaphic_PC1, sub_dist$ECM_abundance) #not highly correlated
@@ -207,6 +209,7 @@ pmin_cp6_aic_df <- merge(pmin_cp6_aic_df, cp6, by = "Cp-p")
 Pmin.lm1 <- lm(PO4_release ~ no_pine_saplings + soil_temp2022 + CPhydrolase_ECbac_abund + Poxidoreductase_ECfun_abund, data = sub_dist)
 summary(Pmin.lm1)
 AIC(Pmin.lm1) #-330
+anova(Pmin.lm1)
 
 ######## assess linear independence of predictors
 plot(sub_dist$soil_temp2022, sub_dist$no_pine_saplings) #not highly correlated
@@ -223,7 +226,7 @@ plot(sub_dist$CPhydrolase_ECbac_abund, sub_dist$Poxidoreductase_ECfun_abund) #no
 
 #RESIDUALS PLOT
 
-mod <- Pmin.lm1 # change to your model
+mod <- Ammon.lmer.1 # change to your model
 
 #get unstandardized predicted and residual values
 unstandardizedPredicted <- predict(mod)

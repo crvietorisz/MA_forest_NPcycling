@@ -8,6 +8,7 @@ library(ggplot2)
 library(tidyverse)
 library(glmmTMB)
 library(DHARMa)
+library(lmerTest)
 
 setwd("MA_forest_NPcycling/")
 
@@ -27,11 +28,13 @@ EMFab.plot <- ggplot(sub_dist, aes(x = ECM_abundance, y = sqrt(Ammonification)))
   theme(legend.position="none", panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), axis.line = element_line(colour = "black"), axis.text=element_text(size=18))
 EMFab.plot
 
+sum(!is.na(sub_dist$Ammonification) & !is.na(sub_dist$ECM_abundance))
+
 # Stats
 EMF.amm <- lmer(sqrt(Ammonification) ~ ECM_abundance + (1|Site), data = sub_dist)
 summary(EMF.amm)
-pt(q=3.642, df=length(na.omit(sub_dist$Ammonification)-2), lower.tail=FALSE) #get p value - MUST INPUT T STAT!
-MuMIn::r.squaredGLMM(EMF.amm) #get Rsquared value - R2c is the conditional R2 and is variance explained by entire model
+anova(EMF.amm, ddf = "Satterthwaite") # p = 0.0004, F = 13.3, numDF = 1, denDF = 109
+MuMIn::r.squaredGLMM(EMF.amm) # R2m = 0.11
 
 ############ fungal high ammonification ICM relative abundance ##########
 
@@ -46,7 +49,7 @@ fun.high.amm.plot
 # Stats
 funICM.amm <- lmer(sqrt(Ammonification) ~ fun_amm_pos_module_abundance + (1|Site), data = sub_dist)
 summary(funICM.amm)
-pt(q=3.533, df=length(na.omit(sub_dist$Ammonification)-2), lower.tail=FALSE) #get p value - MUST INPUT T STAT!
+anova(funICM.amm, ddf = "Satterthwaite") # p = 0.0006, F = 12.5, numDF = 1, denDF = 109
 MuMIn::r.squaredGLMM(funICM.amm) #get Rsquared value - R2c is the conditional R2 and is variance explained by entire model
 
 ############ Bacterial N-decomposition genes relative abundance ##########
@@ -56,27 +59,27 @@ MuMIn::r.squaredGLMM(funICM.amm) #get Rsquared value - R2c is the conditional R2
 # All bacterial chitinases
 chitinaseEC.amm <- lmer(sqrt(Ammonification) ~ sqrt(chitinase_ECbac_abund) + (1|Site), data = sub_dist)
 summary(chitinaseEC.amm)
-pt(q=5.823, df=length(na.omit(sub_dist$Ammonification)-2), lower.tail=FALSE) #get p value - MUST INPUT T STAT!
-MuMIn::r.squaredGLMM(chitinaseEC.amm) #get Rsquared value - R2c is the conditional R2 and is variance explained by entire model
+anova(chitinaseEC.amm, ddf = "Satterthwaite") # p = 7e-07, F = 33.9, numDF = 1, denDF = 43
+MuMIn::r.squaredGLMM(chitinaseEC.amm) #R2m = 0.24
 
 # All bacterial glycosidases (hydrolysing O- and S- glycosyl compounds)
-glycosOS.EC.amm <- lmer(sqrt(Ammonification) ~ sqrt(glycosidaseOS_EC_abund) + (1|Site), data = sub_dist)
+glycosOS.EC.amm <- lmer(sqrt(Ammonification) ~ sqrt(glycosidaseOS_ECbac_abund) + (1|Site), data = sub_dist)
 summary(glycosOS.EC.amm)
-pt(q=5.60, df=length(na.omit(sub_dist$Ammonification)-2), lower.tail=FALSE) #get p value - MUST INPUT T STAT!
-MuMIn::r.squaredGLMM(glycosOS.EC.amm) #get Rsquared value - R2c is the conditional R2 and is variance explained by entire model
-# p = 6e-08, R2m = 0.23
+anova(glycosOS.EC.amm, ddf = "Satterthwaite") # p = 3e-06, F = 31.4, numDF = 1, denDF = 35
+MuMIn::r.squaredGLMM(glycosOS.EC.amm) #R2m = 0.22
+
 
 # Oligotrophic bacterial chitinases
 olig.chitinaseEC.amm <- lmer(sqrt(Ammonification) ~ sqrt(Oligotroph_chitinase_ECbac) + (1|Site), data = sub_dist)
 summary(olig.chitinaseEC.amm)
-pt(q=4.212, df=length(na.omit(sub_dist$Ammonification)-2), lower.tail=FALSE) #get p value - MUST INPUT T STAT!
-MuMIn::r.squaredGLMM(olig.chitinaseEC.amm) #get Rsquared value - R2c is the conditional R2 and is variance explained by entire model
+anova(olig.chitinaseEC.amm, ddf = "Satterthwaite") # p = 4e-05, F = 17.7, numDF = 1, denDF = 117.5
+MuMIn::r.squaredGLMM(olig.chitinaseEC.amm) #R2m = 0.13
 
 # Oligotrophic bacterial glycosidases (hydrolysing O- and S- glycosyl compounds)
 olig.glycosOS.EC.amm <- lmer(sqrt(Ammonification) ~ sqrt(Oligotroph_glycosidaseOS_ECbac) + (1|Site), data = sub_dist)
 summary(olig.glycosOS.EC.amm)
-pt(q=3.829, df=length(na.omit(sub_dist$Ammonification)-2), lower.tail=FALSE) #get p value - MUST INPUT T STAT!
-MuMIn::r.squaredGLMM(olig.glycosOS.EC.amm) #get Rsquared value - R2c is the conditional R2 and is variance explained by entire model
+anova(olig.glycosOS.EC.amm, ddf = "Satterthwaite") # p = 0.0002, F = 14.7, numDF = 1, denDF = 115
+MuMIn::r.squaredGLMM(olig.glycosOS.EC.amm) #R2m = 0.11
 
 ### Figure
 glycosOS_chitinase.ECbac.amm.olig.plot <- ggplot(sub_dist) +
@@ -97,68 +100,64 @@ ggsave("GlycosidaseOS_chitinase_ECs_oligotroph_ammonification.png", path = "/Use
 ############ Copiotrophic bacteria relative abundance ##########
 
 # Stats
-copios.nitrif <- glmmTMB((Nitrification+0.01) ~ Copiotroph_abundance + (1|Site),
+copios.nitrif <- glm((Nitrification+1) ~ Copiotroph_abundance, # when running a glmer with site as an error term, the error term did not explain any variance
                          data = sub_dist,
-                         ziformula = ~ 1,
                          family = Gamma(link = "log"))
-summary(copios.nitrif)
-performance::r2(copios.nitrif) # p = 2e-12, R2m = 0.34
+summary(copios.nitrif) 
+anova(copios.nitrif) # p = 9e-11, F = 50.3, numDF - 1, denDF = 124
+MuMIn::r.squaredGLMM(copios.nitrif) # R2m (lognormal) = 0.32
 
-# use the DHARMa package to test if the data is zero inflated (to confirm that a zero-inflated model is appropriate)
-mod.res<- simulateResiduals(copios.nitrif)
-testZeroInflation(mod.res)
+# use the DHARMa package to test for over-dispersion
+testDispersion(copios.nitrif) # over-dispersion present
 
 # Figure
-copios.nitrif.plot <- ggplot(sub_dist, aes(x = Copiotroph_abundance, y = log(Nitrification+0.01))) +
+copios.nitrif.plot <- ggplot(sub_dist, aes(x = Copiotroph_abundance, y = log(Nitrification+1))) +
   geom_point() +
-  geom_abline(slope=20.6556, intercept=-6.7707) +
-  labs(x = "Copiotroph abundance", y = "log(Nitrification+0.01)")+
+  geom_abline(slope=7.688, intercept=-1.74) +
+  labs(x = "Copiotroph abundance", y = "log(Nitrification+1)")+
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), axis.line = element_line(colour = "black"), axis.title.x = element_text(size=13),axis.title.y = element_text(size=13), axis.text=element_text(size=12))
 copios.nitrif.plot               
 
 ############ Nitrifying bacteria relative abundance ##########
 
 # Stats
-nitrifiers.nitrif <- glmmTMB((Nitrification+1) ~ Nitrifier_abundance + (1|Site),
+nitrifiers.nitrif <- glm((Nitrification+1) ~ Nitrifier_abundance,
                              data = sub_dist,
-                             ziformula = ~ 1,
                              family = Gamma(link = "log"))
-summary(nitrifiers.nitrif)
-performance::r2(nitrifiers.nitrif) # p = 3e-4, R2m = 0.11
+summary(nitrifiers.nitrif) 
+anova(nitrifiers.nitrif) # p = 0.002, F = 9.8, numDF = 1, denDF = 124
+MuMIn::r.squaredGLMM(nitrifiers.nitrif) # R2m (lognormal) = 0.09
 
-# use the DHARMa package to test if the data is zero inflated (to confirm that a zero-inflated model is appropriate)
-mod.res<- simulateResiduals(nitrifiers.nitrif)
-testZeroInflation(nitrifiers.nitrif)
+# use the DHARMa package to test for over-dispersion
+testDispersion(nitrifiers.nitrif) # over-dispersion present
 
 # Figure
 nitrifiers.nitrif.plot <- ggplot(sub_dist, aes(x = Nitrifier_abundance, y = log(Nitrification+1))) +
   geom_point() +
-  geom_abline(slope=38.06525, intercept=0.52442) +
-  scale_x_continuous(breaks=c(0, 0.01, 0.02), limits = c(0,0.021)) +
-  scale_y_continuous(breaks=c(0, 0.5, 1, 2)) +
+  geom_abline(slope=42.07165, intercept=0.52033) +
   labs(x = "Nitrifier abundance", y = "log(Nitrification+1)")+
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), axis.line = element_line(colour = "black"), axis.title.x = element_text(size=13),axis.title.y = element_text(size=13), axis.text=element_text(size=12))
-nitrifiers.nitrif.plot               
+nitrifiers.nitrif.plot       
 
 
 ############ Bacterial high nitrification ICM relative abundance ##########
 
 # Stats
-bacmodule.nitrif <- glmmTMB((Nitrification+0.01) ~ bac_nitr_pos_module_abundance + (1|Site),
+bacmodule.nitrif <- glm((Nitrification+1) ~ bac_nitr_pos_module_abundance,
                             data = sub_dist,
-                            ziformula = ~ 1,
-                            family = Gamma(link = "log"))
+                        family = Gamma(link = "log"))
 summary(bacmodule.nitrif)
-performance::r2(bacmodule.nitrif) # p = 1e-05, R2m = 0.08
+anova(bacmodule.nitrif) # p = 2e-06, F = 25.1, DFnum = 1, DFden = 124
+MuMIn::r.squaredGLMM(bacmodule.nitrif) # R2m (lognormal) = 0.15
 
-# use the DHARMa package to test if the data is zero inflated (to confirm that a zero-inflated model is appropriate)
-mod.res<- simulateResiduals(bacmodule.nitrif)
-testZeroInflation(bacmodule.nitrif)
+
+# use the DHARMa package to test for over-dispersion
+testDispersion(bacmodule.nitrif) # over-dispersion is present
 
 # Figure
-bacmodule.nitrif.plot <- ggplot(sub_dist, aes(x = bac_nitr_pos_module_abundance, y = log(Nitrification+0.01))) +
+bacmodule.nitrif.plot <- ggplot(sub_dist, aes(x = bac_nitr_pos_module_abundance, y = log(Nitrification+1))) +
   geom_point() +
-  geom_abline(slope=7.685, intercept=-5.118) +
+  geom_abline(slope=4.5707, intercept=-2.2608) +
   labs(x = "Bacterial nitrification module", y = "log(Nitrification+0.01)")+
   xlim(0.43, 0.71)+
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), axis.line = element_line(colour = "black"), axis.title.x = element_text(size=13),axis.title.y = element_text(size=13), axis.text=element_text(size=12))
@@ -168,10 +167,10 @@ bacmodule.nitrif.plot
 ###################################################################################################
 
 # Stats
-Poxidored.amm <- lmer(PO4_release ~ Poxidoreductase_ECfun_abund + (1|Site), data = sub_dist)
-summary(Poxidored.amm)
-pt(q=3.207, df=length(na.omit(sub_dist$PO4_release)-2), lower.tail=FALSE) #get p value - MUST INPUT T STAT!
-MuMIn::r.squaredGLMM(Poxidored.amm) #get Rsquared value - R2c is the conditional R2 and is variance explained by entire model
+Poxidored.pmin <- lmer(PO4_release ~ Poxidoreductase_ECfun_abund + (1|Site), data = sub_dist)
+summary(Poxidored.pmin)
+anova(Poxidored.pmin, ddf = "Satterthwaite") # p = 0.002, F = 10.3, numDF = 1, denDF = 96
+MuMIn::r.squaredGLMM(Poxidored.pmin) #R2m = 0.08
 
 # Figure
 Poxidored.plot <- ggplot(sub_dist, aes(x = Poxidoreductase_ECfun_abund, y = PO4_release)) +
@@ -190,7 +189,7 @@ Poxidored.plot
 
 #RESIDUALS PLOT
 
-mod <- Poxidored.amm # change to the model you want
+mod <- Poxidored.pmin # change to the model you want
 
 #get unstandardized predicted and residual values
 unstandardizedPredicted <- predict(mod)

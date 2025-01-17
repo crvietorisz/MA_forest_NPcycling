@@ -1,5 +1,5 @@
 # MA_forest_NPcycling 
-# Stepwise model selection for zero-inflated linear model explaining net nitrification
+# Stepwise model selection for generalized linear model explaining net nitrification
 # 11/21/24 Corinne Vietorisz
 
 library(glmmTMB)
@@ -36,9 +36,9 @@ barplot(pca.nit$loadings[,1])
 barplot(pca.nit$loadings[,2])
 
 p <- autoplot(pca.nit, data = na.omit(Nitr_preds),
-         loadings = TRUE, loadings.colour = 'blue',
-         loadings.label = FALSE, loadings.label.size = 3, loadings.label.colour = 'red3',
-         )
+              loadings = TRUE, loadings.colour = 'blue',
+              loadings.label = FALSE, loadings.label.size = 3, loadings.label.colour = 'red3',
+)
 p + coord_cartesian(xlim = c(-0.3, 0.35))
 
 #When variables that correlate strongly in PC space, choose only the strongest predictor from the cluster
@@ -46,30 +46,30 @@ p + coord_cartesian(xlim = c(-0.3, 0.35))
 
 ########################### Make full model ####################################
 
-mod.full <- glmmTMB((Nitrification+0.01) ~ litter_depth + denitrification_ECbac_abund + med_dist_expl + bac_shannon + Ferns + Nitrifier_abundance + pH + Copiotroph_abundance + num_stems + bac_nitr_pos_module_abundance, 
+mod.full <- glm((Nitrification+1) ~ litter_depth + denitrification_ECbac_abund + med_dist_expl + bac_shannon + Ferns + Nitrifier_abundance + pH + Copiotroph_abundance + num_stems + bac_nitr_pos_module_abundance + ITS_copy_number, 
                     data = sub_dist,
-                    ziformula = ~ 1,
                     family = Gamma(link = "log"))
 summary(mod.full)
-performance::r2(mod.full) # R2 = 0.641
-AIC(mod.full) # 39.15
+MuMIn::r.squaredGLMM(mod.full)
+AIC(mod.full) 
 
 
 ########################### Model selection rounds ####################################
 
 ######## ROUND 1 ###########
 vars_sel_1 <- c(
-     "litter_depth",
-     "denitrification_ECbac_abund",
-     "med_dist_expl",
-     "bac_shannon",
-     "Ferns",
-     "Nitrifier_abundance", 
-     "pH", 
-     "Copiotroph_abundance",
-     "num_stems",
-     "bac_nitr_pos_module_abundance"
-     )
+  "litter_depth",
+  "denitrification_ECbac_abund",
+  "med_dist_expl",
+  "bac_shannon",
+  "Ferns",
+  "Nitrifier_abundance", 
+  "pH", 
+  "Copiotroph_abundance",
+  "num_stems",
+  "bac_nitr_pos_module_abundance",
+  "ITS_copy_number"
+)
 
 # create a dataframe to hold the AIC info
 aic_df_1 <- data.frame(
@@ -79,7 +79,7 @@ aic_df_1 <- data.frame(
 )
 
 # set response variable
-response <- "(Nitrification+0.01)"
+response <- "(Nitrification+1)"
 
 # run for loop that drops one variable at a time and records the AIC for each model
 for (i in 1:length(vars_sel_1)) {
@@ -90,9 +90,8 @@ for (i in 1:length(vars_sel_1)) {
   formula_str <- paste(response, "~", paste(current_predictors, collapse = " + "))
   
   # Fit the linear model
-  model <- glmmTMB(as.formula(formula_str),
+  model <- glm(as.formula(formula_str),
                    data = sub_dist,
-                   ziformula = ~ 1,
                    family = Gamma(link = "log"))
   
   # Put AIC of each model into df
@@ -100,7 +99,7 @@ for (i in 1:length(vars_sel_1)) {
   aic_df_1$AIC[i] <- AIC(model)
 }
 
-# REMOVING PH
+# REMOVING NUM STEMS
 
 
 ######## ROUND 2 ###########
@@ -112,10 +111,12 @@ vars_sel_2 <- c(
   "bac_shannon",
   "Ferns",
   "Nitrifier_abundance", 
+  "pH", 
   "Copiotroph_abundance",
-  "num_stems",
-  "bac_nitr_pos_module_abundance"
+  "bac_nitr_pos_module_abundance",
+  "ITS_copy_number"
 )
+
 
 # create a dataframe to hold the AIC info
 aic_df_2 <- data.frame(
@@ -125,7 +126,7 @@ aic_df_2 <- data.frame(
 )
 
 # set response variable
-response <- "(Nitrification+0.01)"
+response <- "(Nitrification+1)"
 
 # run for loop that drops one variable at a time and records the AIC for each model
 for (i in 1:length(vars_sel_2)) {
@@ -136,9 +137,8 @@ for (i in 1:length(vars_sel_2)) {
   formula_str <- paste(response, "~", paste(current_predictors, collapse = " + "))
   
   # Fit the linear model
-  model <- glmmTMB(as.formula(formula_str),
+  model <- glm(as.formula(formula_str),
                    data = sub_dist,
-                   ziformula = ~ 1,
                    family = Gamma(link = "log"))
   
   # Put AIC of each model into df
@@ -146,20 +146,22 @@ for (i in 1:length(vars_sel_2)) {
   aic_df_2$AIC[i] <- AIC(model)
 }
 
-# REMOVING DENITRIFICATION EC ABUND
+# REMOVING BAC MODULE
 
 ######## ROUND 3 ###########
 
 vars_sel_3 <- c(
   "litter_depth",
+  "denitrification_ECbac_abund",
   "med_dist_expl",
   "bac_shannon",
   "Ferns",
   "Nitrifier_abundance", 
+  "pH", 
   "Copiotroph_abundance",
-  "num_stems",
-  "bac_nitr_pos_module_abundance"
+  "ITS_copy_number"
 )
+
 
 # create a dataframe to hold the AIC info
 aic_df_3 <- data.frame(
@@ -169,7 +171,7 @@ aic_df_3 <- data.frame(
 )
 
 # set response variable
-response <- "(Nitrification+0.01)"
+response <- "(Nitrification+1)"
 
 # run for loop that drops one variable at a time and records the AIC for each model
 for (i in 1:length(vars_sel_3)) {
@@ -180,9 +182,8 @@ for (i in 1:length(vars_sel_3)) {
   formula_str <- paste(response, "~", paste(current_predictors, collapse = " + "))
   
   # Fit the linear model
-  model <- glmmTMB(as.formula(formula_str),
+  model <- glm(as.formula(formula_str),
                    data = sub_dist,
-                   ziformula = ~ 1,
                    family = Gamma(link = "log"))
   
   # Put AIC of each model into df
@@ -190,7 +191,7 @@ for (i in 1:length(vars_sel_3)) {
   aic_df_3$AIC[i] <- AIC(model)
 }
 
-# REMOVING NITRIFIER ABUND
+# REMOVING DENITRIFICATION EC
 
 ######## ROUND 4 ###########
 
@@ -199,9 +200,10 @@ vars_sel_4 <- c(
   "med_dist_expl",
   "bac_shannon",
   "Ferns",
+  "Nitrifier_abundance", 
+  "pH", 
   "Copiotroph_abundance",
-  "num_stems",
-  "bac_nitr_pos_module_abundance"
+  "ITS_copy_number"
 )
 
 # create a dataframe to hold the AIC info
@@ -212,7 +214,7 @@ aic_df_4 <- data.frame(
 )
 
 # set response variable
-response <- "(Nitrification+0.01)"
+response <- "(Nitrification+1)"
 
 # run for loop that drops one variable at a time and records the AIC for each model
 for (i in 1:length(vars_sel_4)) {
@@ -223,9 +225,8 @@ for (i in 1:length(vars_sel_4)) {
   formula_str <- paste(response, "~", paste(current_predictors, collapse = " + "))
   
   # Fit the linear model
-  model <- glmmTMB(as.formula(formula_str),
+  model <- glm(as.formula(formula_str),
                    data = sub_dist,
-                   ziformula = ~ 1,
                    family = Gamma(link = "log"))
   
   # Put AIC of each model into df
@@ -233,7 +234,7 @@ for (i in 1:length(vars_sel_4)) {
   aic_df_4$AIC[i] <- AIC(model)
 }
 
-# REMOVING BAC MODULE ABUNDANCE
+# REMOVING NITRIFIER ABUNDANCE
 
 ######## ROUND 5 ###########
 
@@ -242,8 +243,9 @@ vars_sel_5 <- c(
   "med_dist_expl",
   "bac_shannon",
   "Ferns",
+  "pH", 
   "Copiotroph_abundance",
-  "num_stems"
+  "ITS_copy_number"
 )
 
 # create a dataframe to hold the AIC info
@@ -254,7 +256,7 @@ aic_df_5 <- data.frame(
 )
 
 # set response variable
-response <- "(Nitrification+0.01)"
+response <- "(Nitrification+1)"
 
 # run for loop that drops one variable at a time and records the AIC for each model
 for (i in 1:length(vars_sel_5)) {
@@ -265,9 +267,8 @@ for (i in 1:length(vars_sel_5)) {
   formula_str <- paste(response, "~", paste(current_predictors, collapse = " + "))
   
   # Fit the linear model
-  model <- glmmTMB(as.formula(formula_str),
+  model <- glm(as.formula(formula_str),
                    data = sub_dist,
-                   ziformula = ~ 1,
                    family = Gamma(link = "log"))
   
   # Put AIC of each model into df
@@ -275,7 +276,7 @@ for (i in 1:length(vars_sel_5)) {
   aic_df_5$AIC[i] <- AIC(model)
 }
 
-# REMOVING NUM STEMS
+# REMOVING PH
 
 ######## ROUND 6 ###########
 
@@ -284,7 +285,8 @@ vars_sel_6 <- c(
   "med_dist_expl",
   "bac_shannon",
   "Ferns",
-  "Copiotroph_abundance"
+  "Copiotroph_abundance",
+  "ITS_copy_number"
 )
 
 # create a dataframe to hold the AIC info
@@ -295,7 +297,7 @@ aic_df_6 <- data.frame(
 )
 
 # set response variable
-response <- "(Nitrification+0.01)"
+response <- "(Nitrification+1)"
 
 # run for loop that drops one variable at a time and records the AIC for each model
 for (i in 1:length(vars_sel_6)) {
@@ -306,9 +308,8 @@ for (i in 1:length(vars_sel_6)) {
   formula_str <- paste(response, "~", paste(current_predictors, collapse = " + "))
   
   # Fit the linear model
-  model <- glmmTMB(as.formula(formula_str),
+  model <- glm(as.formula(formula_str),
                    data = sub_dist,
-                   ziformula = ~ 1,
                    family = Gamma(link = "log"))
   
   # Put AIC of each model into df
@@ -316,13 +317,13 @@ for (i in 1:length(vars_sel_6)) {
   aic_df_6$AIC[i] <- AIC(model)
 }
 
-# AIC STARTS GOING UP HERE
-# REMOVING LITTER DEPTH
+# REMOVING ITS COPY NUMBER
 
 
 ######## ROUND 7 ###########
 
 vars_sel_7 <- c(
+  "litter_depth",
   "med_dist_expl",
   "bac_shannon",
   "Ferns",
@@ -338,7 +339,7 @@ aic_df_7 <- data.frame(
 )
 
 # set response variable
-response <- "(Nitrification+0.01)"
+response <- "(Nitrification+1)"
 
 # run for loop that drops one variable at a time and records the AIC for each model
 for (i in 1:length(vars_sel_7)) {
@@ -349,9 +350,8 @@ for (i in 1:length(vars_sel_7)) {
   formula_str <- paste(response, "~", paste(current_predictors, collapse = " + "))
   
   # Fit the linear model
-  model <- glmmTMB(as.formula(formula_str),
+  model <- glm(as.formula(formula_str),
                    data = sub_dist,
-                   ziformula = ~ 1,
                    family = Gamma(link = "log"))
   
   # Put AIC of each model into df
@@ -359,12 +359,12 @@ for (i in 1:length(vars_sel_7)) {
   aic_df_7$AIC[i] <- AIC(model)
 }
 
-# AIC GOES WAY UP THIS ROUND
 # REMOVING BAC SHANNON
 
 ######## ROUND 8 ###########
 
 vars_sel_8 <- c(
+  "litter_depth",
   "med_dist_expl",
   "Ferns",
   "Copiotroph_abundance"
@@ -379,7 +379,7 @@ aic_df_8 <- data.frame(
 )
 
 # set response variable
-response <- "(Nitrification+0.01)"
+response <- "(Nitrification+1)"
 
 # run for loop that drops one variable at a time and records the AIC for each model
 for (i in 1:length(vars_sel_8)) {
@@ -390,9 +390,8 @@ for (i in 1:length(vars_sel_8)) {
   formula_str <- paste(response, "~", paste(current_predictors, collapse = " + "))
   
   # Fit the linear model
-  model <- glmmTMB(as.formula(formula_str),
+  model <- glm(as.formula(formula_str),
                    data = sub_dist,
-                   ziformula = ~ 1,
                    family = Gamma(link = "log"))
   
   # Put AIC of each model into df
@@ -400,16 +399,15 @@ for (i in 1:length(vars_sel_8)) {
   aic_df_8$AIC[i] <- AIC(model)
 }
 
-# AIC GOES WAY UP AGAIN
 # REMOVING FERNS
 
 ######## ROUND 9 ###########
 
 vars_sel_9 <- c(
+  "litter_depth",
   "med_dist_expl",
   "Copiotroph_abundance"
 )
-
 
 # create a dataframe to hold the AIC info
 aic_df_9 <- data.frame(
@@ -419,7 +417,7 @@ aic_df_9 <- data.frame(
 )
 
 # set response variable
-response <- "(Nitrification+0.01)"
+response <- "(Nitrification+1)"
 
 # run for loop that drops one variable at a time and records the AIC for each model
 for (i in 1:length(vars_sel_9)) {
@@ -430,9 +428,8 @@ for (i in 1:length(vars_sel_9)) {
   formula_str <- paste(response, "~", paste(current_predictors, collapse = " + "))
   
   # Fit the linear model
-  model <- glmmTMB(as.formula(formula_str),
+  model <- glm(as.formula(formula_str),
                    data = sub_dist,
-                   ziformula = ~ 1,
                    family = Gamma(link = "log"))
   
   # Put AIC of each model into df
@@ -440,29 +437,76 @@ for (i in 1:length(vars_sel_9)) {
   aic_df_9$AIC[i] <- AIC(model)
 }
 
-# AIC GOES WAY UP AGAIN
+# REMOVING LITTER DEPTH
+
+######## ROUND 10 ###########
+
+vars_sel_10 <- c(
+  "med_dist_expl",
+  "Copiotroph_abundance"
+)
+
+# create a dataframe to hold the AIC info
+aic_df_10 <- data.frame(
+  Model = character(length(vars_sel_10)),
+  AIC = numeric(length(vars_sel_10)),
+  stringsAsFactors = FALSE
+)
+
+# set response variable
+response <- "(Nitrification+1)"
+
+# run for loop that drops one variable at a time and records the AIC for each model
+for (i in 1:length(vars_sel_10)) {
+  # Select predictors excluding the i-th predictor
+  current_predictors <- vars_sel_10[-i]
+  
+  # Create the formula for the model
+  formula_str <- paste(response, "~", paste(current_predictors, collapse = " + "))
+  
+  # Fit the linear model
+  model <- glm(as.formula(formula_str),
+               data = sub_dist,
+               family = Gamma(link = "log"))
+  
+  # Put AIC of each model into df
+  aic_df_10$Model[i] <- paste("Model without", vars_sel_10[i])
+  aic_df_10$AIC[i] <- AIC(model)
+}
+
+
 
 # YAY WE ARE DONE!! so fun
 
 
 ############### BUILD FINAL MODEL ####################
 
-# Pick the model from all rounds with the lowest AIC
-# lowest AIC model is from round 5
-mod.final <- glmmTMB((Nitrification+0.01) ~  litter_depth + Ferns + med_dist_expl + Copiotroph_abundance + bac_shannon,
-                  data = sub_dist,
-                  ziformula = ~ 1,
-                  family = Gamma(link = "log"))
+# Pick the model from all rounds with an AIC within 3 of the lowest AIC (251) with the fewest parameters
+mod.final <- glm((Nitrification+1) ~  litter_depth + Ferns + med_dist_expl + Copiotroph_abundance + bac_shannon + ITS_copy_number,
+                     data = sub_dist,
+                     family = Gamma(link = "log"))
 summary(mod.final)
-AIC(mod.final) # 27.25
-performance::r2(mod.final) # R2 = 0.646
+AIC(mod.final) # 253.6
+MuMIn::r.squaredGLMM(mod.final) # R2 = 0.47
 
-# compare to model without microbial predictors
+# ITS_copy_number is not significant, so removing that parameter
+mod.final2 <- glm((Nitrification+1) ~  litter_depth + Ferns + med_dist_expl + Copiotroph_abundance + bac_shannon,
+                 data = sub_dist,
+                 family = Gamma(link = "log"))
+summary(mod.final2)
+AIC(mod.final2) # 258.6
+anova(mod.final2)
+MuMIn::r.squaredGLMM(mod.final2) # R2 = 0.47
 
-mod.nomic <- glmmTMB((Nitrification+0.01) ~  litter_depth + Ferns,
-                  data = sub_dist,
-                  ziformula = ~ 1,
-                  family = Gamma(link = "log"))
+# use the DHARMa package to test for over-dispersion
+testDispersion(mod.final2) # no over-dispersion
+
+### compare to model without microbial predictors
+
+mod.nomic <- glm((Nitrification+1) ~  litter_depth + Ferns,
+                     data = sub_dist,
+                     family = Gamma(link = "log"))
 summary(mod.nomic) 
-AIC(mod.nomic)
-performance::r2(mod.nomic) # AIC = 107.0, R2 = 0.19
+AIC(mod.nomic) # 391.2
+MuMIn::r.squaredGLMM(mod.nomic) # R2 = 0.09
+
