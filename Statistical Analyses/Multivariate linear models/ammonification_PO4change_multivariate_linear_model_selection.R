@@ -92,19 +92,20 @@ amm_cp3_aic_df <- merge(amm_cp3_aic_df, cp3, by = "Cp-p")
 
 Ammon.lmer.1 <- lmer(sqrt(Ammonification) ~ edaphic_PC1 + ECM_abundance + (1|Site), data = sub_dist)
 summary(Ammon.lmer.1)
-pt(q=-5.895, df=87, lower.tail=TRUE) #edaphic PC1 - 2e-08
-pt(q=2.914, df=length(na.omit(sub_dist$Ammonification)-2), lower.tail=FALSE) #ECM_abundance - 0.002
 MuMIn::r.squaredGLMM(Ammon.lmer.1) #R2m = 0.38, R2c = 0.42
 AIC(Ammon.lmer.1) # 328.8
 anova(Ammon.lmer.1)
+confint(Ammon.lmer.1, 'edaphic_PC1', level = 0.95)
+confint(Ammon.lmer.1, 'ECM_abundance', level = 0.95)
 
 Ammon.lmer.2 <- lmer(sqrt(Ammonification) ~ edaphic_PC1 + fun_amm_pos_module_abundance + (1|Site), data = sub_dist)
 summary(Ammon.lmer.2)
-pt(q=-6.221, df=length(na.omit(sub_dist$Ammonification)-2), lower.tail=TRUE) #edaphic PC1 - 3e-09
-pt(q=3.045, df=length(na.omit(sub_dist$Ammonification)-2), lower.tail=FALSE) #fun_amm_pos_module_abundance - 0.001
 MuMIn::r.squaredGLMM(Ammon.lmer.2) #R2m = 0.38, R2c = 0.42
 AIC(Ammon.lmer.2) # 328.3
 anova(Ammon.lmer.2)
+confint(Ammon.lmer.2, 'edaphic_PC1', level = 0.95)
+confint(Ammon.lmer.2, 'fun_amm_pos_module_abundance', level = 0.95)
+
 
 ######## assess linear independence of predictors
 plot(sub_dist$edaphic_PC1, sub_dist$ECM_abundance) #not highly correlated
@@ -210,6 +211,11 @@ Pmin.lm1 <- lm(PO4_release ~ no_pine_saplings + soil_temp2022 + CPhydrolase_ECba
 summary(Pmin.lm1)
 AIC(Pmin.lm1) #-330
 anova(Pmin.lm1)
+confint(Pmin.lm1, 'no_pine_saplings', level = 0.95)
+confint(Pmin.lm1, 'soil_temp2022', level = 0.95)
+confint(Pmin.lm1, 'CPhydrolase_ECbac_abund', level = 0.95)
+confint(Pmin.lm1, 'Poxidoreductase_ECfun_abund', level = 0.95)
+
 
 ######## assess linear independence of predictors
 plot(sub_dist$soil_temp2022, sub_dist$no_pine_saplings) #not highly correlated

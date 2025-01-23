@@ -5,6 +5,7 @@
 library(lme4)
 library(MuMIn)
 library(leaps)
+library(lmerTest)
 
 setwd("MA_forest_NPcycling/")
 
@@ -71,7 +72,7 @@ for (x in 1:length(result)) {
 }
 
 #set x equal to the lowest AIC row then run through the code within the for loop to determine which variables are included in that combination
-x <- 1
+x <- 5
 summary(model)
 
 #### CP4 ####
@@ -99,18 +100,18 @@ for (x in 1:length(result)) {
 }
 
 #set x equal to the lowest AIC row then run through the code within the for loop to determine which variables are included in that combination
-x <- 1
+x <- 10
 summary(model)
 
-##### Build the lowest AIC model that has a Cp score under 2 ########
+##### Build the lowest AIC model that has a Cp score under 2 where all predictors are significant ########
 
-Ammon.lmer.1 <- lmer(Ammonification ~ soil_temp + soil_moisture + med_dist_expl + (1|Site), data = amm_data)
+Ammon.lmer.1 <- lmer(Ammonification ~ soil_moisture + med_dist_expl + (1|Site), data = amm_data)
 summary(Ammon.lmer.1)
-pt(q=1.395, df=length(na.omit(sub_dist$Ammonification)-2), lower.tail=FALSE) #0.08
-pt(q=3.481, df=length(na.omit(sub_dist$Ammonification)-2), lower.tail=FALSE) #0.0003
-pt(q=2.713, df=length(na.omit(sub_dist$Ammonification)-2), lower.tail=FALSE) #0.003
-MuMIn::r.squaredGLMM(Ammon.lmer.1) #R2m = 0.51 - this is the amount of variance explained by predictor variables by themselves (excluding the random effect)
-AIC(Ammon.lmer.1) # 130
+MuMIn::r.squaredGLMM(Ammon.lmer.1) #R2m = 0.40 - this is the amount of variance explained by predictor variables by themselves (excluding the random effect)
+AIC(Ammon.lmer.1) # 148
+anova(Ammon.lmer.1)
+confint(Ammon.lmer.1, 'soil_moisture', level = 0.95)
+confint(Ammon.lmer.1, 'med_dist_expl', level = 0.95)
 
 ######## assess linear independence of predictors
 plot(amm_data$soil_moisture, amm_data$soil_temp) #not highly correlated
@@ -180,18 +181,19 @@ for (x in 1:length(result)) {
 }
 
 #set x equal to the lowest AIC row then run through the code within the for loop to determine which variables are included in that combination
-x <- 4
+x <- 1
 summary(model)
 
 ##### Build the lowest AIC model where all predictors are significant ########
 # NOTE!! All of the Cp = 3 models that had a Cp score under 2 had one predictor that was not significant. So, we chose the next lowest AIC model with all predictors significant from all Cp=3 options 
 
-Nitr.lmer.1 <- lmer(log(Nitrification +0.01) ~ Copiotroph_abundance + fun_shannon + (1|Site), data = nitr_data)
+Nitr.lmer.1 <- lmer(log(Nitrification +0.01) ~ Copiotroph_abundance + total_basal + (1|Site), data = nitr_data)
 summary(Nitr.lmer.1)
-pt(q=3.377, df=length(na.omit(nitr_data$Nitrification)-2), lower.tail=FALSE) #0.001 - Copiotroph_abundance
-pt(q=1.861, df=length(na.omit(nitr_data$Nitrification)-2), lower.tail=FALSE) #0.04 - fun_shannon
-MuMIn::r.squaredGLMM(Nitr.lmer.1) #R2m = 0.55 - this is the amount of variance explained by predictor variables by themselves (excluding the random effect)
-AIC(Nitr.lmer.1) # 69
+MuMIn::r.squaredGLMM(Nitr.lmer.1) #R2m = 0.56 - this is the amount of variance explained by predictor variables by themselves (excluding the random effect)
+AIC(Nitr.lmer.1) # 80
+anova(Nitr.lmer.1)
+confint(Nitr.lmer.1, 'Copiotroph_abundance', level = 0.95)
+confint(Nitr.lmer.1, 'total_basal', level = 0.95)
 
 ######## assess linear independence of predictors
 plot(nitr_data$Copiotroph_abundance, nitr_data$fun_shannon) #not highly correlated
@@ -283,7 +285,7 @@ for (x in 1:length(result)) {
 }
 
 #set x equal to the lowest AIC row then run through the code within the for loop to determine which variables are included in that combination
-x <- 7
+x <- 1
 summary(model)
 
 ##### Build the lowest AIC model that has a Cp score under 2 ########
@@ -291,6 +293,10 @@ summary(model)
 Pmin.lm1 <- lm(PO4_release ~ bac_pmin_neg_module_abundance + Mg_litterfall + Mo_litterfall, data = pmin_data)
 summary(Pmin.lm1)
 AIC(Pmin.lm1) #-110
+anova(Pmin.lm1)
+confint(Pmin.lm1, 'bac_pmin_neg_module_abundance', level = 0.95)
+confint(Pmin.lm1, 'Mg_litterfall', level = 0.95)
+confint(Pmin.lm1, 'Mo_litterfall', level = 0.95)
 
 ######## assess linear independence of predictors
 plot(pmin_data$Mg_litterfall, pmin_data$bac_pmin_neg_module_abundance) #not highly correlated

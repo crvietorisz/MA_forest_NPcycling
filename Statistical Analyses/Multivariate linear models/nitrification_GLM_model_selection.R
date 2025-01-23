@@ -497,6 +497,12 @@ summary(mod.final2)
 AIC(mod.final2) # 258.6
 anova(mod.final2)
 MuMIn::r.squaredGLMM(mod.final2) # R2 = 0.47
+confint(mod.final2, 'litter_depth', level = 0.95)
+confint(mod.final2, 'Ferns', level = 0.95)
+confint(mod.final2, 'med_dist_expl', level = 0.95)
+confint(mod.final2, 'Copiotroph_abundance', level = 0.95)
+confint(mod.final2, 'bac_shannon', level = 0.95)
+
 
 # use the DHARMa package to test for over-dispersion
 testDispersion(mod.final2) # no over-dispersion
