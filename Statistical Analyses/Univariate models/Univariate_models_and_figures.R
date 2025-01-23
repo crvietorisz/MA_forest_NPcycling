@@ -6,7 +6,6 @@ library(lme4)
 library(MuMIn)
 library(ggplot2)
 library(tidyverse)
-library(glmmTMB)
 library(DHARMa)
 library(lmerTest)
 
@@ -92,7 +91,6 @@ glycosOS_chitinase.ECbac.amm.olig.plot <- ggplot(sub_dist) +
   bacterial N-decomposition genes", y = "sqrt(Net ammonification)")+
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), axis.line = element_line(colour = "black"), axis.title.x = element_text(size=13),axis.title.y = element_text(size=13), axis.text=element_text(size=12))
 glycosOS_chitinase.EC.amm.olig.plot   
-ggsave("GlycosidaseOS_chitinase_ECs_oligotroph_ammonification.png", path = "/Users/moniquegagnon/Desktop/BU/PhD/White pine/Figures/Nutr cycling vs. microbes/Gene abunds", width = 5.1, height = 3.5, dpi=300)
 
 ########################## NITRIFICATION #########################################################
 ###################################################################################################
