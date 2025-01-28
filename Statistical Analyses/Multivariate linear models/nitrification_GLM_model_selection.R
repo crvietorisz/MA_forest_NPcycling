@@ -498,7 +498,7 @@ confint(mod.final, 'bac_shannon', level = 0.95)
 
 
 # use the DHARMa package to test for over-dispersion
-testDispersion(mod.final2) # no over-dispersion
+testDispersion(mod.final) # no over-dispersion
 
 ### compare to model without microbial predictors
 
