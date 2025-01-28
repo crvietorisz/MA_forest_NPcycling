@@ -481,27 +481,20 @@ for (i in 1:length(vars_sel_10)) {
 
 ############### BUILD FINAL MODEL ####################
 
-# Pick the model from all rounds with an AIC within 3 of the lowest AIC (251) with the fewest parameters
-mod.final <- glm((Nitrification+1) ~  litter_depth + Ferns + med_dist_expl + Copiotroph_abundance + bac_shannon + ITS_copy_number,
-                     data = sub_dist,
-                     family = Gamma(link = "log"))
-summary(mod.final)
-AIC(mod.final) # 253.6
-MuMIn::r.squaredGLMM(mod.final) # R2 = 0.47
+# Pick the model from all rounds with the lowest AIC where all predictors are significant
 
-# ITS_copy_number is not significant, so removing that parameter
-mod.final2 <- glm((Nitrification+1) ~  litter_depth + Ferns + med_dist_expl + Copiotroph_abundance + bac_shannon,
+mod.final <- glm((Nitrification+1) ~  litter_depth + Ferns + med_dist_expl + Copiotroph_abundance + bac_shannon,
                  data = sub_dist,
                  family = Gamma(link = "log"))
-summary(mod.final2)
-AIC(mod.final2) # 258.6
-anova(mod.final2)
-MuMIn::r.squaredGLMM(mod.final2) # R2 = 0.47
-confint(mod.final2, 'litter_depth', level = 0.95)
-confint(mod.final2, 'Ferns', level = 0.95)
-confint(mod.final2, 'med_dist_expl', level = 0.95)
-confint(mod.final2, 'Copiotroph_abundance', level = 0.95)
-confint(mod.final2, 'bac_shannon', level = 0.95)
+summary(mod.final)
+AIC(mod.final) # 258.6
+anova(mod.final)
+MuMIn::r.squaredGLMM(mod.final) # R2 = 0.46
+confint(mod.final, 'litter_depth', level = 0.95)
+confint(mod.final, 'Ferns', level = 0.95)
+confint(mod.final, 'med_dist_expl', level = 0.95)
+confint(mod.final, 'Copiotroph_abundance', level = 0.95)
+confint(mod.final, 'bac_shannon', level = 0.95)
 
 
 # use the DHARMa package to test for over-dispersion
